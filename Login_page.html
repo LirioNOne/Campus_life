@@ -1,70 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Title</title>
-  <link rel="stylesheet" href="Login_page_styles.css">
-  <link href="Main_page_styles.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="Login_page_styles.css">
+    <link href="Main_page_styles.css" rel="stylesheet">
 </head>
 <body>
-  <section class="background_screen">
+<section class="background_screen">
     <div class="login_page">
-      <nav class="nav_head">
-        <div class="nav_block">
-          <div class="logo">
-            <div class="logo_image">
-             <a href="Main_page.html">
-               <img src="" alt="Logo" class="logo_image_block">
-             </a>
+        <nav class="nav_head">
+            <div class="nav_block">
+                <div class="logo">
+                    <div class="logo_image">
+                        <a href="Main_page.html">
+                            <img src="" alt="Logo" class="logo_image_block">
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <div class="nav_login">
+                        <div class="login">
+                            <a href="Login_page.html">login</a>
+                        </div>
+                        <div class="registration">
+                            <a href="Registration_page.html">registration</a>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-          <div>
-            <div class="nav_login" >
-              <div class="login">
-                <a href="Login_page.html">login</a>
-              </div>
-              <div class="registration">
-                <a href="Registration_page.html">registration</a>
-              </div>
+        </nav>
+        <main class="login_block">
+            <div class="login_block_section">
+                <div class="login_indent">
+                    <a class="entry_font">Entry</a>
+                    <div class="input_login">
+
+                        <label for="username">Login:</label>
+                        <input type="text" id="username" class="input_text">
+                    </div>
+                    <div class="input_password">
+
+                        <label for="password">Password:</label>
+                        <input type="password" id="password" class="input_text">
+                    </div>
+                    <div>
+                        <a href="Main_page.html">
+                            <button>entry</button>
+                        </a>
+                    </div>
+                    <div style="margin-top: 30px;">
+                        <a>
+                            <a>If you haven't account:</a>
+                            <a href="Registration_page.html">Registration</a>
+                        </a>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-      </nav>
-      <main class="login_block">
-        <div class="login_block_section">
-          <div class="login_indent">
-            <a class="entry_font">Entry</a>
-            <div class="input_login">
-              <!--<a>Login</a>
-                <label style="padding-left: 5px">
-                  <input name="login" value="" >
-                </label>-->
-              <label for="username">Login:</label>
-              <input type="text" id="username">
-            </div>
-            <div class="input_password">
-              <!--<a>Password</a>
-              <label style="padding-left: 5px">
-                <input name="password" value="" type="password">
-              </label>-->
-              <label for="password">Password:</label>
-              <input type="password" id="password">
-            </div>
-            <div>
-              <a href="Main_page.html">
-                <button>entry</button>
-              </a>
-            </div>
-            <div style="margin-top: 30px;">
-              <a>
-                <a>If you haven't account:</a>
-                <a href="Registration_page.html">Registration</a>
-              </a>
-            </div>
-          </div>
-        </div>
-      </main>
+        </main>
     </div>
-  </section>
+</section>
 </body>
 </html>

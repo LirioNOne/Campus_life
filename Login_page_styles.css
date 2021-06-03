@@ -1,68 +1,74 @@
 body {
-  margin: 0;
+    margin: 0;
 }
-.background_screen{
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  background-color: lightgoldenrodyellow;
+
+.background_screen {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: #edeef0;
 }
 
 .login_page {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: 100%;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
 }
 
 .login_block {
-  display: flex;
-  flex-direction: column;
-  margin: auto;
-  width: 40%;
-  height: 100%;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    width: 40%;
+    height: 100%;
 }
 
 .login_block_section {
-  width: 100%;
-  height: 100%;
-  margin: 15px 0;
-  background-color: antiquewhite;
-  border: 1px solid black;
+    width: 100%;
+    min-width: 390px;
+    height: 100%;
+    margin: 15px 0;
+    background-color: #ffffff;
+    border: 1px solid black;
 }
 
 .login_indent {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.input_login{
-  display: flex;
-  flex-direction: row;
-  width: 250px;
-  height: 25px;
-  /*border: 1px solid black;*/
-  margin: 15px;
-  align-items: baseline;
+.input_login {
+    display: flex;
+    flex-direction: row;
+    width: 250px;
+    height: 25px;
+    /*border: 1px solid black;*/
+    margin: 15px;
+    align-items: baseline;
 }
 
 .input_password {
-  display: flex;
-  flex-direction: row;
-  width: 250px;
-  height: 25px;
-  /*border: 1px solid black;*/
-  margin: 15px;
-  align-items: baseline;
+    display: flex;
+    flex-direction: row;
+    width: 250px;
+    height: 25px;
+    /*border: 1px solid black;*/
+    margin: 15px;
+    align-items: baseline;
 }
 
 .entry_font {
-  padding: 20px 0;
-  font-size: 28px;
+    padding: 20px 0;
+    font-size: 28px;
 }
 
 .registration_text_indent {
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
+}
+
+.input_text {
+    width: 100%;
 }
