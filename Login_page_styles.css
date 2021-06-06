@@ -40,23 +40,13 @@ body {
 }
 
 .input_login {
-    display: flex;
-    flex-direction: row;
     width: 250px;
-    height: 25px;
-    /*border: 1px solid black;*/
     margin: 15px;
-    align-items: baseline;
 }
 
 .input_password {
-    display: flex;
-    flex-direction: row;
     width: 250px;
-    height: 25px;
-    /*border: 1px solid black;*/
     margin: 15px;
-    align-items: baseline;
 }
 
 .entry_font {
