@@ -2,7 +2,7 @@
 /shelf/
 /workspace.xml
 # Datasource local storage ignored files
-/../../../../../:\Campus_life\course_work\Campus_life\.idea/dataSources/
+/../../../../../../:\Users\vpotk\PycharmProjects\djangoProject\.idea/dataSources/
 /dataSources.local.xml
 # Editor-based HTTP Client requests
 /httpRequests/
