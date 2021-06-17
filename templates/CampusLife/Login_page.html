@@ -1,0 +1,65 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTC">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'CampusLife/Login_page_styles.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'CampusLife/Main_page_styles.css' %}">
+</head>
+<body>
+<section class="background_screen">
+    <div class="login_page">
+        <nav class="nav_head">
+            <div class="nav_block">
+                <div class="logo">
+                    <div class="logo_image">
+                        <a href="{% url 'events:go_to_event_page' %}">
+                            <img src="" alt="Logo" class="logo_image_block">
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <div class="nav_login">
+                        <div class="login">
+                            <a href="{% url 'events:login_page' %}">login</a>
+                        </div>
+                        <div class="registration">
+                            <a href="{% url 'events:registration_page' %}">registration</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <main class="login_block">
+            <div class="login_block_section">
+                <div class="login_indent">
+                    <a class="entry_font">Entry</a>
+                    <div class="input_login">
+
+                        <label for="username">Login:</label>
+                        <input type="text" id="username" class="input_text">
+                    </div>
+                    <div class="input_password">
+
+                        <label for="password">Password:</label>
+                        <input type="password" id="password" class="input_text">
+                    </div>
+                    <div>
+                        <a href="{% url 'events:main_page' %}">
+                            <button>entry</button>
+                        </a>
+                    </div>
+                    <div style="margin-top: 30px;">
+                        <a>
+                            <a>If you haven't account:</a>
+                            <a href="{% url 'events:registration_page' %}">Registration</a>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</section>
+</body>
+</html>
