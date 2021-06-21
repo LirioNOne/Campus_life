@@ -1,5 +1,6 @@
 from django.urls import path
-from .views import main_page, login_page, registration_page, going_to_event, going_to_event_detail
+from .views import main_page, login_page, registration_page, going_to_event, going_to_event_detail, event_detail, \
+    comments
 
 app_name = 'events'
 
@@ -8,5 +9,7 @@ urlpatterns = [
     path('login', login_page, name='login_page'),
     path('registration', registration_page, name='registration_page'),
     path('goint_to_event', going_to_event, name='going_to_event'),
-    path('going_to_event_detail/<int:pk>', going_to_event_detail, name='going_to_event_detail')
+    path('going_to_event_detail/<int:pk>', going_to_event_detail, name='going_to_event_detail'),
+    path('event_detail/<int:pk>', event_detail, name='event_detail'),
+    path('event_detail/<int:pk>/comments', comments, name='comments'),
 ]

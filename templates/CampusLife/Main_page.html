@@ -49,7 +49,7 @@
                         {% if qs %}
                             {% for el in qs %}
                                 <div class="ui segment">
-                                    <h3>{{ el.title }}</h3>
+                                    <h3><a href="{% url 'events:event_detail' el.id %}">{{ el.title }}</a></h3>
                                     <span>{{ el.event_datetime }}</span>
                                     <p>{{ el.description }}</p>
                                     {% if el.event_img %}
@@ -59,9 +59,9 @@
                                         {% csrf_token %}
                                         <input type="hidden" name="event_id" value="{{ el.id }}">
                                         {% if user not in el.going_to_event.all %}
-                                            <button class="ui button positive" type="submit">Иду</button>
+                                            <button type="submit">Иду</button>
                                         {% else %}
-                                            <button class="ui button negative" type="submit">Не иду</button>
+                                            <button type="submit">Не иду</button>
                                         {% endif %}
                                         <a href="{% url "events:going_to_event_detail" el.id %}">
                                             {{ el.going_to_event.all.count }} идут

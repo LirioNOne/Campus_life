@@ -25,8 +25,9 @@ class Event(models.Model):
     title = models.TextField('название')
     description = models.TextField('краткое описание')
     event_img = models.ImageField('изображение для события', upload_to='C:/media/event_images', blank=True)
-    event_datetime = models.DateTimeField('время события')
+    event_datetime = models.DateTimeField(auto_now_add=True)
     going_to_event = models.ManyToManyField(User, default=None, blank=True, related_name='going_to_event')
+    event_comments = models.ManyToManyField(User, default=None, blank=True, related_name='event_comments')
 
     def __str__(self):
         return self.title
@@ -56,3 +57,17 @@ class GoingToEvent(models.Model):
     class Meta:
         verbose_name = 'Идущий на событие'
         verbose_name_plural = 'Идущие на события'
+
+
+class Comments(models.Model):
+    user = models.ForeignKey(User, blank=True, null=True, on_delete=models.CASCADE)
+    event = models.ForeignKey(Event, blank=True, null=True, on_delete=models.CASCADE, related_name='comments_event')
+    comment_text = models.TextField('Текст комментария')
+    comment_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return '%s - %s' % (self.event.title, self.user)
+
+    class Meta:
+        verbose_name = 'Комментарий'
+        verbose_name_plural = 'Комментарии'
