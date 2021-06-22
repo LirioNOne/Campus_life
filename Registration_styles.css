@@ -44,7 +44,7 @@
 
 .reg_font {
     align-items: start;
-    padding: 20px 0;
+    padding: 10px 0;
     font-size: 28px;
 }
 
@@ -86,5 +86,6 @@
 .to_login{
     display: flex;
     flex-direction: column;
-    margin-left: 10% ;
+    margin-left: 10%;
+    margin-right: auto;
 }

@@ -67,13 +67,15 @@ body {
 .input_text {
     width: 100%;
 }
-.log_button_block{
-     display: flex;
+
+.log_button_block {
+    display: flex;
     flex-direction: row-reverse;
     margin: 5px 10%;
     width: auto;
 }
-.log_button{
+
+.log_button {
     background-color: #e7e7e7;
     border: none;
     color: #000000;
@@ -81,6 +83,7 @@ body {
     padding: 10px;
     border-radius: 12px;
 }
-.log_button:hover{
-     box-shadow: 10px 10px 25px 0 rgba(0,0,0,0.40);
+
+.log_button:hover {
+    box-shadow: 10px 10px 25px 0 rgba(0, 0, 0, 0.40);
 }

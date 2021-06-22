@@ -6,11 +6,12 @@ a {
     text-decoration: none;
 }
 
-p{
+p {
     margin: 0;
+    word-break: break-all;
 }
 
-button{
+.record_button {
     width: 70px;
     height: 30px;
     background: white;
@@ -51,7 +52,8 @@ h2 {
     background-color: #ffffff;
 
 }
-.register_button{
+
+.register_button {
     background-color: #e7e7e7;
     border: none;
     color: #000000;
@@ -59,8 +61,9 @@ h2 {
     border-radius: 12px;
     cursor: pointer;
 }
-.register_button:hover{
-    border:2px solid #778899;
+
+.register_button:hover {
+    border: 2px solid #778899;
 }
 
 .login {
@@ -70,7 +73,7 @@ h2 {
     background-color: #ffffff;
 }
 
-.login_button{
+.login_button {
     background-color: #e7e7e7;
     border: none;
     color: #000000;
@@ -78,8 +81,9 @@ h2 {
     border-radius: 12px;
     cursor: pointer;
 }
-.login_button:hover{
-    border:2px solid #778899;
+
+.login_button:hover {
+    border: 2px solid #778899;
 }
 
 .logo {
@@ -186,7 +190,7 @@ h2 {
     width: 80px;
 }
 
-.button_to_profile{
+.button_to_profile {
     background-color: #e7e7e7;
     border: none;
     color: #000000;
@@ -194,18 +198,21 @@ h2 {
     padding: 10px;
     border-radius: 12px;
 }
-.button_to_profile:hover{
-    border:2px solid #778899;
+
+.button_to_profile:hover {
+    border: 2px solid #778899;
 }
 
 .events_block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     position: relative;
     margin: 10px;
-    height: 90%;
-    background: #ffffff;
+    height: auto;
 }
 
-.event{
+.event {
     position: relative;
     display: inline-block;
     margin: 20px;
@@ -223,14 +230,14 @@ h2 {
     border-radius: 30px;
 }
 
-.event_info{
+.event_info {
     position: relative;
     padding: 20px;
     margin-left: 10px;
     width: 90%;
     min-width: 100px;
-    height: 65%;
-    min-height: 100px;
+    min-height: 150px;
+    max-height: 40%;
 
     background: white;
     mix-blend-mode: normal;
@@ -240,17 +247,17 @@ h2 {
     border-radius: 30px;
 }
 
-.participants{
+.participants {
     position: relative;
     display: inline-block;
     margin: 10px;
 }
 
-.event_button{
+.event_button {
     display: inline-block;
 }
 
-.event_people{
+.event_people {
     display: inline-block;
     float: right;
     color: white;
