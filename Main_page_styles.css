@@ -6,6 +6,25 @@ a {
     text-decoration: none;
 }
 
+p{
+    margin: 0;
+}
+
+button{
+    width: 70px;
+    height: 30px;
+    background: white;
+    border-color: #6FA8EC;
+    border-radius: 20px;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+h2 {
+    margin: 10px;
+    color: white;
+    padding-left: 30px;
+}
+
 .nav_head {
     display: flex;
     width: 100%;
@@ -177,4 +196,64 @@ a {
 }
 .button_to_profile:hover{
     border:2px solid #778899;
+}
+
+.events_block {
+    position: relative;
+    margin: 10px;
+    height: 90%;
+    background: #ffffff;
+}
+
+.event{
+    position: relative;
+    display: inline-block;
+    margin: 20px;
+    padding-left: 20px;
+
+    height: 30%;
+    min-height: 300px;
+    width: 90%;
+    min-width: 95px;
+
+    background: #76A5E0;
+    border: 2px solid #3684E4;
+    box-sizing: border-box;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 30px;
+}
+
+.event_info{
+    position: relative;
+    padding: 20px;
+    margin-left: 10px;
+    width: 90%;
+    min-width: 100px;
+    height: 65%;
+    min-height: 100px;
+
+    background: white;
+    mix-blend-mode: normal;
+    border: 1px solid #1E80F3;
+    box-sizing: border-box;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 30px;
+}
+
+.participants{
+    position: relative;
+    display: inline-block;
+    margin: 10px;
+}
+
+.event_button{
+    display: inline-block;
+}
+
+.event_people{
+    display: inline-block;
+    float: right;
+    color: white;
+    margin-top: 8px;
+    margin-left: 10px;
 }
