@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
+from django.http import HttpResponseNotFound
 from .models import Event, GoingToEvent, Comments
-from .forms import AddComment
+from .forms import AddComment, AddEvent
 
 
 def main_page(request):
@@ -28,10 +29,10 @@ def going_to_event(request):
         event, created = GoingToEvent.objects.get_or_create(user=user, event_id=event_id)
 
         if not created:
-            if event.value == 'Иду':
-                event.value = 'Не иду'
+            if event.value == 'Пойти':
+                event.value = 'Уже иду'
             else:
-                event.value = 'Иду'
+                event.value = 'Пойти'
 
         event.save()
     return redirect('events:main_page')
@@ -62,10 +63,10 @@ def event_detail(request, pk):
         event, created = GoingToEvent.objects.get_or_create(user=user, event_id=pk)
 
         if not created:
-            if event.value == 'Иду':
-                event.value = 'Не иду'
+            if event.value == 'Пойти':
+                event.value = 'Уже иду'
             else:
-                event.value = 'Иду'
+                event.value = 'Пойти'
 
         event.save()
         return redirect('events:event_detail', pk)
@@ -91,6 +92,55 @@ def comments(request, pk):
             obj.save()
 
             return redirect('events:event_detail', pk)
+
+
+def create_event(request):
+    user = request.user
+    if request.method == "POST":
+        form = AddEvent(request.POST)
+
+        if form.is_valid():
+            obj = form.save(commit=False)
+            obj.creator_id = user
+            obj.save()
+
+            return redirect('events:main_page')
+    else:
+        form = AddEvent()
+        context = {
+            'form': form
+        }
+        return render(request, 'CampusLife/Create.html', context)
+
+
+def edit_event(request, pk):
+    try:
+        event = Event.objects.get(id=pk)
+
+        if request.method == "POST":
+            event.title = request.POST.get("title")
+            event.description = request.POST.get("description")
+            event.event_img = request.POST.get("event_img")
+            event.save()
+            return redirect('events:main_page')
+        else:
+            form = AddEvent()
+            context = {
+                'form': form,
+                'event': event,
+            }
+            return render(request, 'CampusLife/Edit_Events.html', context)
+    except Event.DoesNotExist:
+        return HttpResponseNotFound("<h2>Событие не найдено</h2>")
+
+
+def delete_event(request, pk):
+    try:
+        event = Event.objects.get(id=pk)
+        event.delete()
+        return redirect('events:main_page')
+    except Event.DoesNotExist:
+        return HttpResponseNotFound("<h2>Событие не найдено</h2>")
 
 
 def login_page(request):

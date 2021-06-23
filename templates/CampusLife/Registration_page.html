@@ -1,46 +1,73 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/html">
+<html lang="en">
 <head>
-    <meta charset="UTC">
-    <title>Title</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'CampusLife/Registration_styles.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'CampusLife/Main_page_styles.css' %}">
+    <meta charset="UTF-8">
+    <title>Регистрация</title>
+    <link href="{% static 'CampusLife/Registration_styles.css' %}" rel="stylesheet">
+    <link href="{% static 'CampusLife/Main_page_styles.css' %}" rel="stylesheet">
 </head>
 <body>
 <main class="registration_section">
-    <nav class="nav_head nav_move">
+    <nav class="nav_head">
+        <div class="logo">
+            <div class="logo_image">
+                <a href="{% url 'events:main_page' %}">
+                    <img src="Campus%20Life(11).png" alt="Logo" class="logo_image_block">
+                </a>
+            </div>
+        </div>
         <div class="nav_block">
-            <div class="logo">
-                <div class="logo_image">
-                    <a href="{% url 'events:main_page' %}">
-                        <img src=" " alt="Logo" class="logo_image_block">
+            <div class="nav_login">
+                <div class="login">
+                    <a href="{% url 'events:login_page' %}">
+                        <button class="login_button">Вход</button>
                     </a>
                 </div>
-            </div>
-            <div>
-                <div class="nav_login">
-                    <div class="login">
-                        <a href="{% url 'events:login_page' %}">login</a>
-                    </div>
-                    <div class="registration">
-                        <a href="{% url 'events:registration_page' %}">registration</a>
-                    </div>
+                <div class="registration">
+                    <a href="{% url 'events:registration_page' %}">
+                        <button class="register_button">Регистрация</button>
+                    </a>
                 </div>
             </div>
         </div>
     </nav>
     <div class="registration_block">
         <div class="reg_entry_unit">
+            <a class="reg_font">Регистрация</a>
             <div class="reg_list">
-                <a class="reg_font">Registration</a>
-                <div class="reg_line">Name</div>
-                <div class="reg_line">Surname</div>
-                <div class="reg_line">Login</div>
-                <div class="reg_line">Password</div>
-                <div class="reg_line">Age</div>
-                <div class="reg_line">Course</div>
-                <div class="reg_information">About you</div>
+                <label class="reg_input_line">
+                    <input type="text" class="input_text" placeholder="Имя">
+                </label>
+                <label class="reg_input_line">
+                    <input type="text" class="input_text" placeholder="Фамилия">
+                </label>
+                <label class="reg_input_line">
+                    <input type="text" class="input_text" placeholder="Логин">
+                </label>
+                <label class="reg_input_line">
+                    <input type="date" class="input_text">
+                </label>
+                <label class="reg_input_line">
+                    <input type="password" class="input_text" placeholder="Пароль">
+                </label>
+                <label class="reg_input_line">
+                    <input type="password" class="input_text" placeholder="Повтор пароля">
+                </label>
+                <label class="reg_input_line">
+                    <input type="text" class="input_text" placeholder="Курс">
+                </label>
+                <label class="reg_input_line">
+                    <input type="file" accept="image/*">
+                </label>
+                <label class="reg_information">
+                    <textarea placeholder="Информация о себе" class="reg_self_info"></textarea>
+                </label>
+                <div class="reg_button_block">
+                    <a href="Main_page.html">
+                        <button class="reg_button" type="submit">зарегистрироваться</button>
+                    </a>
+                </div>
             </div>
         </div>
     </div>

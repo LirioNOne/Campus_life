@@ -41,15 +41,15 @@ class Event(models.Model):
 
 
 EVENT_CHOICES = (
-    ('Иду', 'Иду'),
-    ('Не иду', 'Не иду'),
+    ('Пойти', 'Пойти'),
+    ('Уже иду', 'Уже иду'),
 )
 
 
 class GoingToEvent(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
-    value = models.CharField(choices=EVENT_CHOICES, default='Иду', max_length=10)
+    value = models.CharField(choices=EVENT_CHOICES, default='Пойду', max_length=10)
 
     def __str__(self):
         return str(self.event)

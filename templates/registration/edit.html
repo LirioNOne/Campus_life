@@ -1,0 +1,17 @@
+{% extends "registration/base.html" %}
+
+{% block title %}Edit your account{% endblock %}
+
+{% block content %}
+
+<h1>Edit your account</h1>
+<p>You can edit your account using the following form:</p>
+
+<form action="edit" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+                <input type="hidden" name="next" value="{% url 'profile' %}"/>
+            <p><input type="submit" value="Edit"></p>
+ </form>
+
+{% endblock %}

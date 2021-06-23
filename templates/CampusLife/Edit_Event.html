@@ -1,0 +1,74 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTC">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'CampusLife/Main_page_styles.css' %}"  >
+</head>
+<body>
+<section class="sec_block">
+    <nav class="nav_head nav_move">
+        <div class="nav_block">
+            <div class="logo">
+                <div class="logo_image">
+                    <a href="{% url 'events:main_page' %}">
+                        <img src="" alt="Logo" class="logo_image_block">
+                    </a>
+                </div>
+            </div>
+            <div>
+                <div class="nav_login">
+                    <div class="login">
+                        <a href="{% url 'events:login_page' %}">login</a>
+                    </div>
+                    <div class="registration">
+                        <a href="{% url 'events:registration_page' %}">registration</a>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <a href="{% url 'events:main_page' %}">Создать событие</a>
+            </div>
+            <div class="my_page">
+                <div class="my_page_section">my page</div>
+            </div>
+        </div>
+    </nav>
+    <main class="main_block" role="main">
+        <section class="main_submit">
+            <div class="main_section">
+                <div>
+                    <div class="list">
+                        <a class="list_section">Chat</a>
+                        <a class="list_section">Delivery</a>
+                        <a class="list_section">Find Companions</a>
+                    </div>
+                </div>
+            </div>
+            <div class="main_events">
+                {% if event %}
+                <form action="{% url 'events:edit_event' event.id %}" method="POST">
+                    {% csrf_token %}
+                    <p>
+                        <label>Введите новый заголовок</label>
+                        <input type="text" name="title" value="{{ event.title }}">
+                    </p>
+                    <p>
+                        <label>Введите новое описание</label>
+                        <input type="text" name="description" value="{{ event.description }}">
+                    </p>
+                    <p>
+                        <label>Загрузите новое изображение</label>
+                        <input type="image" name="event_img" value="{{ event.event_img }}">
+                    </p>
+                    <input type="submit" value="Сохранить изменения">
+                </form>
+                {% endif %}
+            </div>
+            <div class="main_event_section"></div>
+        </section>
+    </main>
+</section>
+</body>
+</html>

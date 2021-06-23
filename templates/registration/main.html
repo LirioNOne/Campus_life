@@ -1,0 +1,12 @@
+{% extends "registration/base.html" %}
+
+{% block title %}Log-in{% endblock %}
+{% block content %}
+{% if request.user.is_authenticated %}
+<h1>Hi, <a href="{% url 'profile' request.user.username %}"></a>{{ request.user.username }}</h1>
+<p>You can visit <a href="{% url 'main' %}">main page</a>, <a href="{% url 'change-password' %}">change password</a> and
+    <a href="{% url 'logout' %}">log-out</a></p>
+{% else %}
+<h1>Hi, please <a href="{% url 'login' %}">log-in</a> or <a href="{% url 'register' %}">register</a></h1>
+{% endif %}
+{% endblock %}

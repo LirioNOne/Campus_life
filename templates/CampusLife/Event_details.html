@@ -1,101 +1,106 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/html">
+<html lang="en" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
 <head>
-    <meta charset="UTC">
-    <title>Title</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'CampusLife/Main_page_styles.css' %}"  >
+    <meta charset="UTF-8">
+    <title>Главная</title>
+    <link rel="stylesheet" href="{% static 'CampusLife/Main_page_styles.css' %}">
 </head>
 <body>
 <section class="sec_block">
     <nav class="nav_head nav_move">
+        <div class="logo">
+            <div class="logo_image">
+                <a href="{% url 'events:main_page' %}">
+                    <img src="Campus%20Life(11).png" alt="Logo" class="logo_image_block">
+                </a>
+            </div>
+        </div>
         <div class="nav_block">
-            <div class="logo">
-                <div class="logo_image">
-                    <a href="{% url 'events:main_page' %}">
-                        <img src="" alt="Logo" class="logo_image_block">
+            <div class="nav_login">
+                <div class="login">
+                    <a href="{% url 'events:login_page' %}">
+                        <button class="login_button">Вход</button>
                     </a>
                 </div>
-            </div>
-            <div>
-                <div class="nav_login">
-                    <div class="login">
-                        <a href="{% url 'events:login_page' %}">login</a>
-                    </div>
-                    <div class="registration">
-                        <a href="{% url 'events:registration_page' %}">registration</a>
-                    </div>
+                <div class="registration">
+                    <a href="{% url 'events:registration_page' %}">
+                        <button class="register_button">Регистрация</button>
+                    </a>
+                </div>
+                <div class="registration">
+                    <a href="{% url 'events:create_event' %}">Создать событие</a>
                 </div>
             </div>
-            <div class="my_page">
-                <div class="my_page_section">my page</div>
+            <div style="display: flex; flex-direction: row-reverse">
+                <div class="my_page">
+                    <a href="my_page.html">
+                        <button class="button_to_profile">Профиль</button>
+                    </a>
+                </div>
             </div>
         </div>
     </nav>
     <main class="main_block" role="main">
-        <section class="main_submit">
-            <div class="main_section">
-                <div>
-                    <div class="list">
-                        <a class="list_section">Chat</a>
-                        <a class="list_section">Delivery</a>
-                        <a class="list_section">Find Companions</a>
-                    </div>
-                </div>
-            </div>
+        <div class="main_submit">
             <div class="main_events">
-                <div>
-                    <a href="{% url 'events:main_page' %}">
-                        <p>< назад</p>
-                    </a>
-                    {% if event %}
-                        {% for el in event %}
-                            <h2>{{ el.title }}</h2>
-                            <span>{{ el.event_datetime }}</span>
-                            <div>
-                                <p>{{ el.description }}</p>
-                            </div>
-                            <form action="{% url 'events:event_detail' el.id %}" method="POST" class="ui form">
-                                {% csrf_token %}
-                                <div style="margin-top: 50px">
-                                    {% if user not in el.going_to_event.all %}
-                                        <button type="submit">Иду</button>
-                                    {% else %}
-                                        <button type="submit">Не иду</button>
-                                    {% endif %}
-                                    <a href="{% url "events:going_to_event_detail" el.id %}">
-                                                {{ el.going_to_event.all.count }} идут
+                <div class="events_block">
+                    {% for el in event %}
+                    <div>
+                        <p style="text-align: right"><a href="{% url 'events:edit_event' el.id %}">Редактировать</a></p>
+                        <p style="text-align: right"><a href="{% url 'events:delete_event' el.id %}">Удалить событие</a></p>
+                    </div>
+                    <div class="event">
+                        <h2>{{ el.title }}</h2>
+                        <span>{{ el.event_datetime }}</span>
+                        <div class="event_info">
+                            <p>{{ el.description }}</p>
+                        </div>
+                        {% if el.event_img %}
+                            {{ el.event_img }}
+                        {% endif %}
+                       <form action="{% url 'events:event_detail' el.id %}" method="POST">
+                            {% csrf_token %}
+                            <div class="participants">
+                                {% if user not in el.going_to_event.all %}
+                                    <button type="submit" class="record_button">Пойду</button>
+                                {% else %}
+                                    <button type="submit" class="record_button2">Уже иду</button>
+                                {% endif %}
+                                <div class="event_people">
+                                    <a style="color: white" href="{% url "events:going_to_event_detail" el.id %}">
+                                                Всего идёт: {{ el.going_to_event.all.count }}
                                     </a>
                                 </div>
-                            </form>
-                            <div>
-                                <form action="{% url 'events:comments' el.id %}" method="POST">
-                                    {% csrf_token %}
-                                    <div style="margin-top: 50px">
-                                        {{ form.comment_text }}
-                                    <br>
-                                    <br>
-                                    <input type="submit" value="Добавить комментарий">
-                                    </div>
-                                </form>
-                                <h4>Комментарии</h4>
-                                {% if not qs %}
-                                        <div>Ещё нет комментариев</div>
-                                    {% else %}
-                                        {% for comment in qs %}
-                                            <strong>{{ comment.user }} - {{ comment.comment_date }}</strong>
-                                            <p>{{ comment.comment_text }}</p>
-                                            <br>
-                                        {% endfor %}
-                                    {% endif %}
                             </div>
-                        {% endfor %}
-                    {% endif %}
+                        </form>
+                    </div>
+                    <form action="{% url 'events:comments' el.id %}" method="POST">
+                        {% csrf_token %}
+                        <div style="margin-top: 50px">
+                            {{ form.comment_text }}
+                        <br>
+                        <br>
+                        <input type="submit" value="Добавить комментарий">
+                        </div>
+                    </form>
+                    <h4>Комментарии</h4>
+                    {% if not qs %}
+                            <div>Ещё нет комментариев</div>
+                        {% else %}
+                            {% for comment in qs %}
+                                <strong>{{ comment.user }} - {{ comment.comment_date }}</strong>
+                                <p>{{ comment.comment_text }}</p>
+                                <br>
+                            {% endfor %}
+                        {% endif %}
+                    <a href="{% url 'events:main_page' %}" style="justify-content: flex-start">
+                        <p >< назад</p>
+                    </a>
                 </div>
-                <div style="padding-bottom: 100%; padding-top: 0"></div>
             </div>
-            <div class="main_event_section"></div>
-        </section>
+        {% endfor %}
+        </div>
     </main>
 </section>
 </body>

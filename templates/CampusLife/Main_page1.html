@@ -1,0 +1,87 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTC">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'CampusLife/Main_page_styles.css' %}"  >
+</head>
+<body>
+<section class="sec_block">
+    <nav class="nav_head nav_move">
+        <div class="nav_block">
+            <div class="logo">
+                <div class="logo_image">
+                    <a href="{% url 'events:main_page' %}">
+                        <img src="" alt="Logo" class="logo_image_block">
+                    </a>
+                </div>
+            </div>
+            <div>
+                <div class="nav_login">
+                    <div class="login">
+                        <a href="{% url 'events:login_page' %}">login</a>
+                    </div>
+                    <div class="registration">
+                        <a href="{% url 'events:registration_page' %}">registration</a>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <a href="{% url 'events:create' %}">Создать событие</a>
+            </div>
+            <div class="my_page">
+                <div class="my_page_section">my page</div>
+            </div>
+        </div>
+    </nav>
+    <main class="main_block" role="main">
+        <section class="main_submit">
+            <div class="main_section">
+                <div>
+                    <div class="list">
+                        <a class="list_section">Chat</a>
+                        <a class="list_section">Delivery</a>
+                        <a class="list_section">Find Companions</a>
+                    </div>
+                </div>
+            </div>
+            <div class="main_events">
+                <div>
+                    <div class="ui container">
+                        {% if qs %}
+                            {% for el in qs %}
+                                <div class="ui segment">
+                                    <h3><a href="{% url 'events:event_detail' el.id %}">{{ el.title }}</a></h3>
+                                    <span>{{ el.event_datetime }}</span>
+                                    <p>{{ el.description }}</p>
+                                    {% if el.event_img %}
+                                        <img src="{{ el.event_img }}">
+                                    {% endif %}
+                                    <form action="{% url 'events:going_to_event' %}" method="POST" class="ui form">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="event_id" value="{{ el.id }}">
+                                        {% if user not in el.going_to_event.all %}
+                                            <button type="submit">Иду</button>
+                                        {% else %}
+                                            <button type="submit">Не иду</button>
+                                        {% endif %}
+                                        <a href="{% url "events:going_to_event_detail" el.id %}">
+                                            {{ el.going_to_event.all.count }} идут
+                                        </a>
+                                    </form>
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            <p>Пока нет никаких событий 😢</p>
+                        {% endif %}
+                    </div>
+                </div>
+                <div style="padding-bottom: 100%; padding-top: 0"></div>
+            </div>
+            <div class="main_event_section"></div>
+        </section>
+    </main>
+</section>
+</body>
+</html>
