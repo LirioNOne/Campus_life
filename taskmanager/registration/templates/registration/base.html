@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <title>{% block title %}Registration{% endblock %}</title>
+</head>
+<body>
+<div id="header">
+    <span class="logo">Hello,</span>
+    {% if request.user.is_authenticated %}
+         {{ request.user.username }}<br>
+        <a href="{% url "main" %}">Main</a>
+        <a href="{% url "logout" %}">Log-out</a>
+
+
+    {% else %}
+        <a href="{% url "login" %}">login</a>
+        <a href="{% url "main" %}">Main</a>
+
+    {% endif %}
+    </span>
+</div>
+<div id="content">
+    {% block content %}
+    {% endblock %}
+</div>
+</body>
+</html>
