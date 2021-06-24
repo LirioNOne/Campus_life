@@ -2,22 +2,55 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
-class CustomUser(models.Model):
-    login = models.TextField('логин')
-    password = models.TextField('пароль')
-    salt = models.TextField('соль')
-    email = models.EmailField('email')
-    full_name = models.TextField('полное имя')
-    profile_icon = models.TextField('изображение профиля', blank=True)
-    self_info = models.TextField('личная информация', blank=True)
-    is_admin = models.BooleanField('админ?', default=False)
+# class CustomUser(models.Model):
+#     login = models.TextField('логин')
+#     password = models.TextField('пароль')
+#     salt = models.TextField('соль')
+#     email = models.EmailField('email')
+#     full_name = models.TextField('полное имя')
+#     profile_icon = models.TextField('изображение профиля', blank=True)
+#     self_info = models.TextField('личная информация', blank=True)
+#     is_admin = models.BooleanField('админ?', default=False)
+#
+#     def __str__(self):
+#         return self.login
+#
+#     class Meta:
+#         verbose_name = 'Пользователь'
+#         verbose_name_plural = 'Пользователи'
 
-    def __str__(self):
-        return self.login
+class CustomUser(User):
+    GENDER = (
+        ('man', 'Man'),
+        ('woman', 'Woman')
+    )
+
+    birthday = models.DateField(verbose_name='День рождения', null=True)
+    course = models.CharField(max_length=1, verbose_name='Курс')
+    inform = models.TextField(verbose_name='Personal information')
+    avatar = models.ImageField(verbose_name='avatar', blank=True, null=True, upload_to='images/')
+    gender = models.CharField(max_length=6, choices=GENDER, default='man')
+
+    @staticmethod
+    def age(birthday):
+        import datetime
+        return int((datetime.date.today() - birthday).days / 365.25)
+
+    def values(self):
+        return CustomUser.objects.filter(field=self).first()[0]
+
+    val = property(values)
 
     class Meta:
-        verbose_name = 'Пользователь'
+        verbose_name = 'ПОльзователь'
         verbose_name_plural = 'Пользователи'
+
+    @staticmethod
+    def get_by_username(username):
+        pass
+
+    def __str__(self):
+        return self.username
 
 
 class Event(models.Model):

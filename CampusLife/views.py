@@ -143,9 +143,5 @@ def delete_event(request, pk):
         return HttpResponseNotFound("<h2>Событие не найдено</h2>")
 
 
-def login_page(request):
-    return render(request, 'CampusLife/Login_page.html')
-
-
 def registration_page(request):
     return render(request, 'CampusLife/Registration_page.html')
