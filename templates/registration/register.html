@@ -1,18 +1,101 @@
-{% extends "registration/base.html" %}
-
-
-{% block title %}Create an account{% endblock %}
-
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Регистрация</title>
+    <link href="{% static 'CampusLife/Registration_styles.css' %}" rel="stylesheet">
+    <link href="{% static 'CampusLife/Main_page_styles.css' %}" rel="stylesheet">
+</head>
 {% block content %}
-{% load crispy_forms_tags %}
+    {% load crispy_forms_tags %}
 
-<h1>Create an account</h1>
-<p>Please, sign up using the following form:</p>
-<div class="container">
-    <form action="register" method="post" enctype="multipart/form-data">
-        {{ crispy.as_p}}
-        {% csrf_token %}
-        <p><input type="submit" value="Create my account"></p>
-    </form>
-</div>
+    <main class="registration_section">
+        <nav class="nav_head">
+            <div class="logo">
+                <div class="logo_image">
+                    <a href="{% url 'events:main_page' %}">
+                        <img src="{{ MEDIA_URL }}Campus%20Life(11).png" alt="Logo" class="logo_image_block">
+                    </a>
+                </div>
+            </div>
+            <div class="nav_block">
+                <div class="nav_login">
+                    <div class="login">
+                        <a href="{% url 'events:login_page' %}">
+                            <button class="login_button">Вход</button>
+                        </a>
+                    </div>
+                    <div class="registration">
+                        <a href="{% url 'events:registration_page' %}">
+                            <button class="register_button">Регистрация</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <div class="registration_block">
+            <div class="reg_entry_unit">
+                <a class="reg_font">Регистрация</a>
+                <div class="reg_list">
+                    <form action="register" method="post" enctype="multipart/form-data" novalidate>
+                        <div class="reg_input_line">
+                            <input type="text" class="input_text" placeholder="Имя" {{ form.first_name }}>
+                        </div>
+                        <div class="reg_input_line">
+                            <input type="text" class="input_text" placeholder="Фамилия" {{ form.last_name }}>
+                        </div>
+                        <div class="reg_input_line">
+                            <input type="text" class="input_text" placeholder="Логин" {{ form.username }}>
+                        </div>
+                        <div class="reg_input_line">
+                            <input type="text" class="input_text" placeholder="Почта"{{ form.email }}>
+                        </div>
+                        <div class="reg_input_line">
+                            <input type="date" class="input_text">
+                        </div>
+                        <div class="reg_input_line">
+                            {{ form.gender }}
+                        </div>
+                        <div class="reg_input_line">
+                            <input type="password" class="input_text" placeholder="Пароль" {{ form.password1 }}>
+                        </div>
+                        <div class="reg_input_line">
+                            <input type="password" class="input_text" placeholder="Повтор пароля" {{ form.password2 }}>
+                        </div>
+                        <div class="reg_input_line">
+                            <input type="text" class="input_text" placeholder="Курс" {{ form.course }}>
+                        </div>
+                        <div class="reg_input_line">
+                            <input type="file" accept="image/*">
+                        </div>
+                        <div class="reg_information">
+                            <textarea name="textarea" placeholder="Информация о себе"
+                                      class="reg_self_info"  {{ form.inform }} ></textarea>
+                        </div>
+                        {% csrf_token %}
+                        <div class="reg_button_block">
+                            <a href=" {% url 'events:main_page' %}">
+                                <button class="reg_button" type="submit">зарегистрироваться</button>
+                            </a>
+                        </div>
+
+                        {#                        <input type="hidden" name="next" value="{% url 'events:main_page' %}"/>#}
+                        {#                        <p><input type="submit" value="registration"></p>#}
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+        {#        <h1>Регитсрация</h1>#}
+        {#        <p>Please, sign up using the following form:</p>#}
+        {#        <div class="container">#}
+        {#            <form action="register" method="post" enctype="multipart/form-data">#}
+        {#                {{ crispy.as_p }}#}
+        {#                {% csrf_token %}#}
+        {#                <p><input type="submit" value="Create my account"></p>#}
+        {#            </form>#}
+        {#        </div>#}
 {% endblock %}

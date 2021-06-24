@@ -1,7 +1,8 @@
+from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
 from django.http import HttpResponseNotFound
 from .models import Event, GoingToEvent, Comments
-from .forms import AddComment, AddEvent
+from .forms import AddComment, AddEvent, UserRegistrationForm
 
 
 def main_page(request):
@@ -144,4 +145,21 @@ def delete_event(request, pk):
 
 
 def registration_page(request):
-    return render(request, 'CampusLife/Registration_page.html')
+    if request.method == 'POST':
+        user_form = UserRegistrationForm(request.POST, request.FILES)
+        if user_form.is_valid():
+            new_user = user_form.save(commit=False)
+            if 'avatar' in request.FILES:
+                new_user.avatar = request.FILES['avatar']
+
+            new_user.set_password(user_form.cleaned_data['password'])
+
+            new_user.save()
+            user = authenticate(username=user_form.cleaned_data['username'],
+                                password=user_form.cleaned_data['password'],
+                                )
+            login(request, user)
+            return redirect('events:main_page')
+    else:
+        user_form = UserRegistrationForm()
+    return render(request, 'registration/register.html', {'form': user_form})

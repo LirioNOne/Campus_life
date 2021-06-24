@@ -21,15 +21,15 @@ from django.contrib.auth.models import User
 
 class CustomUser(User):
     GENDER = (
-        ('man', 'Man'),
-        ('woman', 'Woman')
+        ('Мужчина', 'Мужчина'),
+        ('Женщина', 'Женщина')
     )
 
     birthday = models.DateField(verbose_name='День рождения', null=True)
     course = models.CharField(max_length=1, verbose_name='Курс')
-    inform = models.TextField(verbose_name='Personal information')
-    avatar = models.ImageField(verbose_name='avatar', blank=True, null=True, upload_to='images/')
-    gender = models.CharField(max_length=6, choices=GENDER, default='man')
+    inform = models.TextField(verbose_name='Информация о себе')
+    avatar = models.ImageField(verbose_name='фото', blank=True, null=True, upload_to='images/')
+    gender = models.CharField(max_length=7, verbose_name='Пол', choices=GENDER, default='мужчина')
 
     @staticmethod
     def age(birthday):

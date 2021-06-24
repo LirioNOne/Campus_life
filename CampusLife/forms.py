@@ -1,9 +1,10 @@
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import AuthenticationForm
+from django.core.exceptions import ValidationError
 
 from .models import Comments, Event, CustomUser
-from django.forms import ModelForm, Textarea, ModelChoiceField, CharField, PasswordInput, DateField, TextInput, \
-    ImageField
+from django.forms import ModelForm, Textarea, ChoiceField, CharField, PasswordInput, DateField, TextInput, \
+    ImageField, Select, RadioSelect
 
 
 class AddComment(ModelForm):
@@ -65,16 +66,23 @@ class UserLoginForm(AuthenticationForm):
 
 
 class UserRegistrationForm(ModelForm):
-    password = CharField(label='Password', widget=PasswordInput)
-    password2 = CharField(label='Repeat password', widget=PasswordInput)
+    password = CharField(label='Пароль', widget=PasswordInput)
+    password2 = CharField(label='Повторите пароль', widget=PasswordInput)
     birthday = DateField(
+        label='Дата рождения',
         widget=TextInput(attrs={'type': 'date'})
     )
-    avatar = ImageField()
+    GENDER = (
+        ("Мужчина", "Мужчина"),
+        ("Женщина", "Женщина")
+    )
+    avatar = ImageField(label='Фото')
+    gender = ChoiceField(label='Пол', choices=GENDER, widget=Select())
 
     def __init__(self, *args, **kwargs):
         super(UserRegistrationForm, self).__init__(*args, **kwargs)
         self.fields['username'].help_text = None
+        self.fields['gender'].required = False
 
     class Meta:
         model = CustomUser
