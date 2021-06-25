@@ -141,6 +141,7 @@ li {
 .brief_info{
     position: relative;
     margin-right: 20px;
+    margin-left: 20px;
     height: 300px;
     width: 300px;
     min-width: 250px;
@@ -172,22 +173,22 @@ li {
 
 .profile_change{
     margin: 10px;
-    width: 80px;
-    height: 35px;
-    border: none;
+    height: 35px;;
+    border-color: #3684E4;
     cursor: pointer;
-    border-radius: 12px;
+    border-radius: 30px;
+    background: white;
 }
 .profile_change:hover{
     border: 2px solid #778899;
 }
 .button_to_profile{
-    background-color: #e7e7e7;
-    border: none;
-    color: #000000;
+    background-color: #ffffff;
+    border-color: #3684E4;
     width: 80px;
+    color: #000000;
     padding: 10px;
-    border-radius: 12px;
+    border-radius: 30px;
 }
 .button_to_profile:hover{
     border:2px solid #778899;
