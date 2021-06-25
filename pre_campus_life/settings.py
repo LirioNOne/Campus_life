@@ -73,8 +73,12 @@ WSGI_APPLICATION = 'pre_campus_life.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'django_project',
+        'USER': 'user_name',
+        'PASSWORD': 'password',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
     }
 }
 
@@ -122,7 +126,6 @@ STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-REGISTRATION_REDIRECT_URL = "main_page"
 LOGOUT_REDIRECT_URL = "login"
 
 MEDIA_URL = '/media/'

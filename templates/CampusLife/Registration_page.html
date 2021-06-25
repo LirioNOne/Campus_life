@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <title>Регистрация</title>
     <link href="{% static 'CampusLife/Registration_styles.css' %}" rel="stylesheet">
-    <link href="{% static 'CampusLife/Main_page_styles.css' %}" rel="stylesheet">
+    <link href="{% static 'CampusLife/Main_page_styles1.css' %}" rel="stylesheet">
 </head>
 {% block content %}
     {% load crispy_forms_tags %}
@@ -55,9 +55,9 @@
                         <div class="reg_input_line">
                             <input type="date" class="input_text" name="birthday">
                         </div>
-                        <div class="reg_input_line" >
-                            {{ form.gender }}
-                        </div>
+{#                        <div class="reg_input_line" >#}
+{#                            {{ crispy.gender }}#}
+{#                        </div>#}
                         <div class="reg_input_line">
                             <input type="password" class="input_text" placeholder="Пароль" name="password1">
                         </div>
@@ -68,17 +68,17 @@
                             <input type="text" class="input_text" placeholder="Курс" name="course">
                         </div>
                         <div class="reg_input_line">
-                            <input type="file" accept="image/*">
+                            <input type="file" accept="image/*" name="avatar">
                         </div>
                         <div class="reg_information">
-                            <textarea name="textarea" placeholder="Информация о себе"
-                                      class="reg_self_info"  {{ inform }} ></textarea>
+                            <textarea name="inform" placeholder="Информация о себе" class="reg_self_info"></textarea>
                         </div>
 
                         <div class="reg_button_block">
-                            <a href=" {% url 'events:main_page' %}">
-                                <button class="reg_button" type="submit">зарегистрироваться</button>
-                            </a>
+                            <input class="red_button" type="submit" value="Зарегистрироваться">
+{#                            <a href=" {% url 'events:main_page' %}">#}
+{#                                <button class="reg_button" type="submit">зарегистрироваться</button>#}
+{#                            </a>#}
                         </div>
 
                         {#                        <input type="hidden" name="next" value="{% url 'events:main_page' %}"/>#}

@@ -12,7 +12,7 @@
         <div class="logo">
             <div class="logo_image">
                 <a href="{% url 'events:main_page' %}">
-                    <img src="{{ MEDIA_URL }}Campus%20Life(11).png" alt="Logo" class="logo_image_block">
+                    <img src="/media/Campus%20Life(11).png" alt="Logo" class="logo_image_block">
                 </a>
             </div>
         </div>
@@ -49,14 +49,14 @@
                         {% if qs %}
                             {% for el in qs %}
                                 <div class="event">
-                                    <h2><a style="color: white" href="{% url 'events:event_detail' el.id %}" >{{ el.title }}</a></h2>
+                                    <h2><a style="color: black" href="{% url 'events:event_detail' el.id %}" >{{ el.title }}</a></h2>
                                     <span>{{ el.event_datetime }}</span>
                                     <div class="event_info">
                                         <p>{{ el.description }}</p>
+                                        {% if el.event_img %}
+                                            <img src="{{ el.event_img.url }}" class="post_image">
+                                        {% endif %}
                                     </div>
-                                    {% if el.event_img %}
-                                        <img src="{{ el.event_img }}">
-                                    {% endif %}
                                     <div class="participants">
                                         <div class="event_button">
                                             <form action="{% url 'events:going_to_event' %}" method="POST">

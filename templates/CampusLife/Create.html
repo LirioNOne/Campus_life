@@ -12,7 +12,7 @@
         <div class="logo">
             <div class="logo_image">
                 <a href="{% url 'events:main_page' %}">
-                    <img src="Campus%20Life(11).png" alt="Logo" class="logo_image_block">
+                    <img src="/media/Campus%20Life(11).png" alt="Logo" class="logo_image_block">
                 </a>
             </div>
         </div>
@@ -44,7 +44,7 @@
     <main class="main_block" role="main">
         <div class="main_submit">
             <div class="main_events">
-                <form action="{% url 'events:create_event' %}" method="POST">
+                <form action="{% url 'events:create_event' %}" method="POST" enctype="multipart/form-data">
                     <div>
                         {% csrf_token %}
                         {{ form.title }}

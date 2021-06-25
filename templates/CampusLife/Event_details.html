@@ -12,7 +12,7 @@
         <div class="logo">
             <div class="logo_image">
                 <a href="{% url 'events:main_page' %}">
-                    <img src="Campus%20Life(11).png" alt="Logo" class="logo_image_block">
+                    <img src="/media/Campus%20Life(11).png" alt="Logo" class="logo_image_block">
                 </a>
             </div>
         </div>
@@ -55,10 +55,10 @@
                         <span>{{ el.event_datetime }}</span>
                         <div class="event_info">
                             <p>{{ el.description }}</p>
+                            {% if el.event_img %}
+                                <img src="{{ el.event_img.url }}" class="post_image">
+                            {% endif %}
                         </div>
-                        {% if el.event_img %}
-                            {{ el.event_img }}
-                        {% endif %}
                        <form action="{% url 'events:event_detail' el.id %}" method="POST">
                             {% csrf_token %}
                             <div class="participants">
