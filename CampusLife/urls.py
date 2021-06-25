@@ -5,7 +5,7 @@ from django.contrib.auth import views as v
 from pre_campus_life import settings
 from registration.forms import UserLoginForm
 from .views import main_page, registration_page, going_to_event, going_to_event_detail, event_detail, \
-    comments, create_event, edit_event, delete_event, customers_profile_view
+    comments, create_event, edit_event, delete_event, customers_profile_view, edit_profile
 
 app_name = 'events'
 
@@ -24,6 +24,7 @@ urlpatterns = [
                        v.PasswordChangeView.as_view(template_name='CampusLife/change-password.html',
                                                     success_url='change-password-done'),
                        name='change-password'),
+                  path('edit_profile/<username>', edit_profile, name='edit_profile'),
                   path('registration', registration_page, name='registration_page'),
                   path('going_to_event', going_to_event, name='going_to_event'),
                   path('going_to_event_detail/<int:pk>', going_to_event_detail, name='going_to_event_detail'),

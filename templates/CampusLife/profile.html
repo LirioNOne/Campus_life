@@ -3,7 +3,7 @@
 {% block content %}
     {% load crispy_forms_tags %}
     <h2>Profile</h2>
-    <main class="main_block" role="main">
+    <main style="margin-top: 15px">
         <section class="main_submit">
             <div class="profile">
                 <div class="profile_top">
@@ -21,7 +21,7 @@
                         </ul>
                     </div>
                     <div style="column-fill: auto;">
-                        <a href="Change_profile_settings.html" style="margin-left: auto;">
+                        <a href="{% url 'events:edit_profile' request.user.username %}" style="margin-left: auto;">
                             <button class="profile_change" type="button" style="margin-right: 0; margin-left: auto;">
                                 Изменить профиль
                             </button>

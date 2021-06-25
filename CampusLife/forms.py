@@ -4,7 +4,7 @@ from django.core.exceptions import ValidationError
 
 from .models import Comments, Event, CustomUser
 from django.forms import ModelForm, Textarea, ChoiceField, CharField, PasswordInput, DateField, TextInput, \
-    ImageField, Select, RadioSelect
+    ImageField, Select, RadioSelect, EmailField
 
 
 class AddComment(ModelForm):
@@ -142,3 +142,20 @@ class ChangePasswordForm(PasswordChangeForm):
                     self.add_error('old_password', 'Old password is wrong')
         else:
             form = ChangePasswordForm()
+
+
+class EditProfile(ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        super(EditProfile, self).__init__(*args, **kwargs)
+
+    first_name = CharField(max_length=150)
+    last_name = CharField(max_length=150)
+    email = EmailField()
+    course = CharField(max_length=2)
+    inform = TextInput()
+
+    class Meta:
+        model = CustomUser
+        fields = ('first_name', 'last_name', 'email', 'course', 'inform', 'avatar')
+

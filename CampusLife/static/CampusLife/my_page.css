@@ -96,7 +96,7 @@ li {
 }
 
 .profile {
-    height: auto;
+    height: 100%;
     min-height: 500px;
     width: 60%;
     min-width: 700px;
@@ -104,13 +104,13 @@ li {
     border: thin solid black;
     border-radius: 10px;
     margin: 0 auto;
+    opacity: 90%;
+    filter: alpha(Opacity=70);
 }
-
-.profile_top{
+.profile_top {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
-
 }
 
 .main_section {
@@ -136,7 +136,7 @@ li {
     border: 1px solid black;
 }
 
-.brief_info{
+.brief_info {
     position: relative;
     margin-right: 20px;
     height: 300px;
@@ -145,7 +145,7 @@ li {
     border-radius: 30px;
 }
 
-.photo{
+.photo {
     position: relative;
     margin-right: 60px;
     top: 35px;
@@ -158,7 +158,7 @@ li {
     border: thin solid black;
 }
 
-.hobby_info{
+.hobby_info {
     position: relative;
     font-weight: bold;
     width: 500px;
@@ -167,7 +167,7 @@ li {
 }
 
 
-.profile_change{
+.profile_change {
     margin: 10px 0;
     width: 80px;
     height: 35px;
@@ -175,10 +175,12 @@ li {
     cursor: pointer;
     border-radius: 12px;
 }
-.profile_change:hover{
+
+.profile_change:hover {
     border: 2px solid #778899;
 }
-.button_to_profile{
+
+.button_to_profile {
     background-color: #e7e7e7;
     border: none;
     color: #000000;
@@ -186,10 +188,12 @@ li {
     padding: 10px;
     border-radius: 12px;
 }
-.button_to_profile:hover{
-    border:2px solid #778899;
+
+.button_to_profile:hover {
+    border: 2px solid #778899;
 }
-.entries{
+
+.entries {
     width: 300px;
     height: 250px;
     border: 1px solid black;

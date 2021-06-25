@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponseNotFound
 from .models import Event, GoingToEvent, Comments, CustomUser
 from pre_campus_life import settings
-from .forms import AddComment, EditEvent, UserRegistrationForm, AddEvent
+from .forms import AddComment, EditEvent, UserRegistrationForm, AddEvent, EditProfile
 
 
 def main_page(request):
@@ -33,6 +33,10 @@ def going_to_event(request):
         event, created = GoingToEvent.objects.get_or_create(user=user, event_id=event_id)
 
         if not created:
+            event.value = 'Уже иду'
+        if event.value == 'Пойти':
+            event.value = 'Уже иду'
+        else:
             event.value = 'Уже иду'
 
         event.save()
@@ -203,3 +207,30 @@ def registration_page(request):
     else:
         user_form = UserRegistrationForm()
         return render(request, 'CampusLife/Registration_page.html', {'crispy': user_form})
+
+
+def edit_profile(request, username):
+    try:
+        user = CustomUser.objects.filter(username=username).first()
+        if request.method == "POST":
+            form = EditProfile(request.POST, request.FILES)
+            if form.is_valid():
+                user.first_name = request.POST["first_name"]
+                user.last_name = request.POST["last_name"]
+                user.course = request.POST["course"]
+                user.inform = request.POST["inform"]
+                if 'avatar' in request.FILES:
+                    user.avatar = request.FILES['avatar']
+                user.save()
+                return redirect('events:profile', username)
+
+        form = EditProfile()
+
+        context = {
+            'form': form,
+            'user': user,
+        }
+        return render(request, 'CampusLife/edit_profile.html', context)
+    except Event.DoesNotExist:
+        return HttpResponseNotFound("<h2>Событие не найдено</h2>")
+
