@@ -54,9 +54,6 @@
                                     <div class="event_info">
                                         <p>{{ el.description }}</p>
                                     </div>
-                                    {% if el.event_img %}
-                                        <img src="{{ el.event_img }}">
-                                    {% endif %}
                                     <div class="participants">
                                         <div class="event_button">
                                             <form action="{% url 'events:going_to_event' %}" method="POST">

@@ -57,7 +57,7 @@ class Event(models.Model):
     creator_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name='creator_id')
     title = models.TextField('название')
     description = models.TextField('краткое описание')
-    event_img = models.ImageField('изображение для события', upload_to='C:/media/event_images', blank=True)
+    event_img = models.ImageField('изображение для события', upload_to='media/', blank=True)
     event_datetime = models.DateTimeField(auto_now_add=True)
     going_to_event = models.ManyToManyField(User, default=None, blank=True, related_name='going_to_event')
     event_comments = models.ManyToManyField(User, default=None, blank=True, related_name='event_comments')

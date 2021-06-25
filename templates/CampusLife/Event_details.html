@@ -12,7 +12,7 @@
         <div class="logo">
             <div class="logo_image">
                 <a href="{% url 'events:main_page' %}">
-                    <img src="Campus%20Life(11).png" alt="Logo" class="logo_image_block">
+                    <img src="{{ MEDIA_URL }}Campus%20Life(11).png" alt="Logo" class="logo_image_block">
                 </a>
             </div>
         </div>
@@ -46,46 +46,50 @@
             <div class="main_events">
                 <div class="events_block">
                     {% for el in event %}
-                    <div>
-                        <p style="text-align: right"><a href="{% url 'events:edit_event' el.id %}">Редактировать</a></p>
-                        <p style="text-align: right"><a href="{% url 'events:delete_event' el.id %}">Удалить событие</a></p>
-                    </div>
-                    <div class="event">
-                        <h2>{{ el.title }}</h2>
-                        <span>{{ el.event_datetime }}</span>
-                        <div class="event_info">
-                            <p>{{ el.description }}</p>
+                        <div>
+                            <p style="text-align: right"><a href="{% url 'events:edit_event' el.id %}">Редактировать</a>
+                            </p>
+                            <p style="text-align: right"><a href="{% url 'events:delete_event' el.id %}">Удалить
+                                событие</a></p>
                         </div>
-                        {% if el.event_img %}
-                            {{ el.event_img }}
-                        {% endif %}
-                       <form action="{% url 'events:event_detail' el.id %}" method="POST">
-                            {% csrf_token %}
-                            <div class="participants">
-                                {% if user not in el.going_to_event.all %}
-                                    <button type="submit" class="record_button">Пойду</button>
-                                {% else %}
-                                    <button type="submit" class="record_button2">Уже иду</button>
-                                {% endif %}
-                                <div class="event_people">
-                                    <a style="color: white" href="{% url "events:going_to_event_detail" el.id %}">
-                                                Всего идёт: {{ el.going_to_event.all.count }}
-                                    </a>
+                        <div class="event">
+                            <h2>{{ el.title }}</h2>
+                            <span>{{ el.event_datetime }}</span>
+                            <div class="event_info">
+
+                                <p>{{ el.description }}</p>
+                            </div>
+                            {% if el.event_img %}
+                                <br>
+                                <div align="center" ><img src="{{ MEDIA_URL }}{{ el.event_img }}"></div>
+                            {% endif %}
+                            <form action="{% url 'events:event_detail' el.id %}" method="POST">
+                                {% csrf_token %}
+                                <div class="participants">
+                                    {% if user not in el.going_to_event.all %}
+                                        <button type="submit" class="record_button">Пойду</button>
+                                    {% else %}
+                                        <button type="submit" class="record_button2">Уже иду</button>
+                                    {% endif %}
+                                    <div class="event_people">
+                                        <a style="color: white" href="{% url "events:going_to_event_detail" el.id %}">
+                                            Всего идёт: {{ el.going_to_event.all.count }}
+                                        </a>
+                                    </div>
                                 </div>
+                            </form>
+                        </div>
+                        <form action="{% url 'events:comments' el.id %}" method="POST">
+                            {% csrf_token %}
+                            <div style="margin-top: 50px">
+                                {{ form.comment_text }}
+                                <br>
+                                <br>
+                                <input type="submit" value="Добавить комментарий">
                             </div>
                         </form>
-                    </div>
-                    <form action="{% url 'events:comments' el.id %}" method="POST">
-                        {% csrf_token %}
-                        <div style="margin-top: 50px">
-                            {{ form.comment_text }}
-                        <br>
-                        <br>
-                        <input type="submit" value="Добавить комментарий">
-                        </div>
-                    </form>
-                    <h4>Комментарии</h4>
-                    {% if not qs %}
+                        <h4>Комментарии</h4>
+                        {% if not qs %}
                             <div>Ещё нет комментариев</div>
                         {% else %}
                             {% for comment in qs %}
@@ -94,12 +98,12 @@
                                 <br>
                             {% endfor %}
                         {% endif %}
-                    <a href="{% url 'events:main_page' %}" style="justify-content: flex-start">
-                        <p >< назад</p>
-                    </a>
-                </div>
-            </div>
-        {% endfor %}
+                        <a href="{% url 'events:main_page' %}" style="justify-content: flex-start">
+                            <p>< назад</p>
+                        </a>
+                        </div>
+                        </div>
+                    {% endfor %}
         </div>
     </main>
 </section>

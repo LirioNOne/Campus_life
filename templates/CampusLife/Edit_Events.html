@@ -12,7 +12,7 @@
         <div class="logo">
             <div class="logo_image">
                 <a href="{% url 'events:main_page' %}">
-                    <img src="Campus%20Life(11).png" alt="Logo" class="logo_image_block">
+                    <img src="{{ MEDIA_URL }}Campus%20Life(11).png" alt="Logo" class="logo_image_block">
                 </a>
             </div>
         </div>
@@ -45,18 +45,19 @@
         <div class="main_submit">
             <div class="main_events">
                 {% if event %}
-                <form action="{% url 'events:edit_event' event.id %}" method="POST">
+                <form enctype="multipart/form-data" action="{% url 'events:edit_event' event.id %}" method="POST">
                     {% csrf_token %}
                     <p>
                         <label>Введите новый заголовок</label>
-                        <input type="text" name="title" value="{{ event.title }}">
+                        <input type="text" name="form.title" value="{{ event.title }}">
                     </p>
                     <p>
                         <label>Введите новое описание</label>
-                        <textarea name="description">{{ event.description }}</textarea>
+                        <textarea name="form.description">{{ event.description }}</textarea>
                     </p>
                     <p>
                         <label>Загрузите новое изображение</label>
+                        <br>
                         <input type="image" name="event_img" value="{{ event.event_img }}">
                     </p>
                     <input type="submit" value="Сохранить изменения">
