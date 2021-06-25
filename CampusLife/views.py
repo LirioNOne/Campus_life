@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponseNotFound
 from .models import Event, GoingToEvent, Comments
 from pre_campus_life import settings
-from .forms import AddComment, AddEvent, UserRegistrationForm
+from .forms import AddComment, EditEvent, UserRegistrationForm, AddEvent
 
 
 def main_page(request):
@@ -33,17 +33,15 @@ def going_to_event(request):
         event, created = GoingToEvent.objects.get_or_create(user=user, event_id=event_id)
 
         if not created:
-            if event.value == 'Пойти':
-                event.value = 'Уже иду'
-            else:
-                event.value = 'Пойти'
+            event.value = 'Уже иду'
 
         event.save()
     return redirect('events:main_page')
 
 
 def going_to_event_detail(request, pk):
-    qs = GoingToEvent.objects.filter(event=pk)
+    qs = GoingToEvent.objects.filter(event=pk).all()
+    print(qs)
     context = {
         'qs': qs,
     }
@@ -134,27 +132,18 @@ def create_event(request):
 def edit_event(request, pk):
     try:
         event = Event.objects.filter(id=pk).first()
-        event = model_to_dict(event)
         if request.method == "POST":
-
-            form = AddEvent(request.POST, request.FILES, instance=instance)
+            form = EditEvent(request.POST, request.FILES)
             if form.is_valid():
-                form.title = request.POST["title"]
-                form.description = request.POST["description"]
+                event.title = request.POST["title"]
+                event.description = request.POST["description"]
+                print(request.FILES)
                 if 'event_img' in request.FILES:
-                    form.event_img = request.FILES['event_img']
-                form.save()
+                    event.event_img = request.FILES['event_img']
+                event.save()
                 return redirect('events:main_page')
 
-        form = AddEvent()
-        # print(event)
-        # print(f"form -- {form.fields}")
-        # # for k, v in event:
-        # #     print(1)
-        # #     if k in form.data:
-        # #         print(2)
-        # #         form.fields[k] = v
-        # print(form)
+        form = EditEvent()
 
         context = {
             'form': form,

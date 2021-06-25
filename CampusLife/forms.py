@@ -21,30 +21,8 @@ class AddComment(ModelForm):
         }
 
 
-class EditEvent(ModelForm):
-    def __init__(self, *args, **kwargs):
-        super(EditEvent, self).__init__(*args, **kwargs)
-        to_return = {}
-        for k, v in kwargs:
-            to_return.update({k: v})
-        return to_return
-
-
 class AddEvent(ModelForm):
     event_img = ImageField()
-    title = CharField(widget=Textarea(attrs={
-        'class': 'form-control',
-        'placeholder': 'Введите заголовок события',
-        'rows': 2,
-        'cols': 90,
-    }))
-    description = CharField(widget=Textarea(attrs={
-        'class': 'form-control',
-        'placeholder': 'Введите описание события',
-        'rows': 8,
-        'cols': 90,
-        'resize': 'none',
-    }))
 
     def __init__(self, *args, **kwargs):
         super(AddEvent, self).__init__(*args, **kwargs)
@@ -67,6 +45,32 @@ class AddEvent(ModelForm):
                 'resize': 'none',
             }),
         }
+
+
+class EditEvent(ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        super(EditEvent, self).__init__(*args, **kwargs)
+
+    class Meta:
+        model = Event
+        fields = ('title', 'description', 'event_img')
+        widgets = {
+            "title": Textarea(attrs={
+                'class': 'form-control',
+                'placeholder': 'Введите заголовок события',
+                'rows': 2,
+                'cols': 90,
+            }),
+            "description": Textarea(attrs={
+                'class': 'form-control',
+                'placeholder': 'Введите описание события',
+                'rows': 8,
+                'cols': 90,
+                'resize': 'none',
+            }),
+        }
+
 
 
 class UserLoginForm(AuthenticationForm):
@@ -104,6 +108,7 @@ class UserRegistrationForm(ModelForm):
     #     ("Женщина", "Женщина")
     # )
     avatar = ImageField(label='Фото')
+
     # gender = ChoiceField(label='Пол', choices=GENDER, widget=Select())
 
     def __init__(self, *args, **kwargs):
