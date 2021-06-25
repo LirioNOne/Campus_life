@@ -1,7 +1,10 @@
+from PIL import Image
 from django.contrib.auth import authenticate, login
+from django.forms import model_to_dict
 from django.shortcuts import render, redirect
 from django.http import HttpResponseNotFound
 from .models import Event, GoingToEvent, Comments
+from pre_campus_life import settings
 from .forms import AddComment, AddEvent, UserRegistrationForm
 
 
@@ -95,15 +98,29 @@ def comments(request, pk):
             return redirect('events:event_detail', pk)
 
 
+def prettify_image(file_path: str, prefix: str = 'media/') -> None:
+    img = Image.open(f"{prefix}{file_path}")
+    maxsize = (300, 300)
+    img = img.resize(maxsize)
+    print(f"{prefix}{file_path}")
+    img.save(f"{prefix}{file_path}")
+
+
 def create_event(request):
     user = request.user
     if request.method == "POST":
-        form = AddEvent(request.POST)
+        form = AddEvent(request.POST, request.FILES)
 
         if form.is_valid():
             obj = form.save(commit=False)
+            if 'event_img' in request.FILES:
+                img = request.FILES['event_img']
+                obj.event_img = img
+
             obj.creator_id = user
             obj.save()
+            print(type(obj.event_img.path))
+            prettify_image(obj.event_img.path, prefix='')
 
             return redirect('events:main_page')
     else:
@@ -116,21 +133,34 @@ def create_event(request):
 
 def edit_event(request, pk):
     try:
-        event = Event.objects.get(id=pk)
-
+        event = Event.objects.filter(id=pk).first()
+        event = model_to_dict(event)
         if request.method == "POST":
-            event.title = request.POST.get("title")
-            event.description = request.POST.get("description")
-            event.event_img = request.POST.get("event_img")
-            event.save()
-            return redirect('events:main_page')
-        else:
-            form = AddEvent()
-            context = {
-                'form': form,
-                'event': event,
-            }
-            return render(request, 'CampusLife/Edit_Events.html', context)
+
+            form = AddEvent(request.POST, request.FILES, instance=instance)
+            if form.is_valid():
+                form.title = request.POST["title"]
+                form.description = request.POST["description"]
+                if 'event_img' in request.FILES:
+                    form.event_img = request.FILES['event_img']
+                form.save()
+                return redirect('events:main_page')
+
+        form = AddEvent()
+        # print(event)
+        # print(f"form -- {form.fields}")
+        # # for k, v in event:
+        # #     print(1)
+        # #     if k in form.data:
+        # #         print(2)
+        # #         form.fields[k] = v
+        # print(form)
+
+        context = {
+            'form': form,
+            'event': event,
+        }
+        return render(request, 'CampusLife/Edit_Events.html', context)
     except Event.DoesNotExist:
         return HttpResponseNotFound("<h2>Событие не найдено</h2>")
 
