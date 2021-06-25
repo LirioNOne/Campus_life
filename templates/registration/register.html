@@ -38,42 +38,43 @@
             <div class="reg_entry_unit">
                 <a class="reg_font">Регистрация</a>
                 <div class="reg_list">
-                    <form action="register" method="post" enctype="multipart/form-data" novalidate>
+                    <form action="register" method="post" enctype="multipart/form-data" novalidate class="reg_input_line">
+                        {% csrf_token %}
                         <div class="reg_input_line">
-                            <input type="text" class="input_text" placeholder="Имя" {{ form.first_name }}>
+                            <input type="text" class="input_text" placeholder="Имя" name="first_name" >
                         </div>
                         <div class="reg_input_line">
-                            <input type="text" class="input_text" placeholder="Фамилия" {{ form.last_name }}>
+                            <input type="text" class="input_text" placeholder="Фамилия" name="last_name">
                         </div>
                         <div class="reg_input_line">
-                            <input type="text" class="input_text" placeholder="Логин" {{ form.username }}>
+                            <input type="text" class="input_text" placeholder="Логин" name="username">
                         </div>
                         <div class="reg_input_line">
-                            <input type="text" class="input_text" placeholder="Почта"{{ form.email }}>
+                            <input type="text" class="input_text" placeholder="Почта" name="email">
                         </div>
                         <div class="reg_input_line">
-                            <input type="date" class="input_text">
+                            <input type="date" class="input_text" name="birthday">
                         </div>
-                        <div class="reg_input_line">
+                        <div class="reg_input_line" >
                             {{ form.gender }}
                         </div>
                         <div class="reg_input_line">
-                            <input type="password" class="input_text" placeholder="Пароль" {{ form.password1 }}>
+                            <input type="password" class="input_text" placeholder="Пароль" name="pasword1">
                         </div>
                         <div class="reg_input_line">
-                            <input type="password" class="input_text" placeholder="Повтор пароля" {{ form.password2 }}>
+                            <input type="password" class="input_text" placeholder="Повтор пароля" name="password2">
                         </div>
                         <div class="reg_input_line">
-                            <input type="text" class="input_text" placeholder="Курс" {{ form.course }}>
+                            <input type="text" class="input_text" placeholder="Курс" name="course">
                         </div>
                         <div class="reg_input_line">
                             <input type="file" accept="image/*">
                         </div>
                         <div class="reg_information">
                             <textarea name="textarea" placeholder="Информация о себе"
-                                      class="reg_self_info"  {{ form.inform }} ></textarea>
+                                      class="reg_self_info"  {{ inform }} ></textarea>
                         </div>
-                        {% csrf_token %}
+
                         <div class="reg_button_block">
                             <a href=" {% url 'events:main_page' %}">
                                 <button class="reg_button" type="submit">зарегистрироваться</button>

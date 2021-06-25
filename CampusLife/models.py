@@ -29,7 +29,7 @@ class CustomUser(User):
     course = models.CharField(max_length=1, verbose_name='Курс')
     inform = models.TextField(verbose_name='Информация о себе')
     avatar = models.ImageField(verbose_name='фото', blank=True, null=True, upload_to='images/')
-    gender = models.CharField(max_length=7, verbose_name='Пол', choices=GENDER, default='мужчина')
+    gender = models.CharField(max_length=7, verbose_name='Пол', choices=GENDER, default='Мужчина')
 
     @staticmethod
     def age(birthday):

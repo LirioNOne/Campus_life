@@ -28,22 +28,26 @@ def main(request):
 def register(request):
     if request.method == 'POST':
         user_form = UserRegistrationForm(request.POST, request.FILES)
+        print(user_form)
         if user_form.is_valid():
+            print(123)
             new_user = user_form.save(commit=False)
+            print(user_form)
             if 'avatar' in request.FILES:
                 new_user.avatar = request.FILES['avatar']
 
             new_user.set_password(user_form.cleaned_data['password'])
 
             new_user.save()
+            print(new_user)
             user = authenticate(username=user_form.cleaned_data['username'],
                                 password=user_form.cleaned_data['password'],
                                 )
             login(request, user)
-            return redirect('events:main_page')
-    else:
-        user_form = UserRegistrationForm()
-    return render(request, 'registration/register.html', {'crispy': user_form})
+            return redirect('events:Main_page.html')
+        else:
+            user_form = UserRegistrationForm()
+    return render(request, 'CampusLife/Registration_page.html', {'crispy': user_form})
 
 
 def prettify_image(file_path: str) -> None:
