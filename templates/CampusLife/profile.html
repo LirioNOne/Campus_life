@@ -26,7 +26,7 @@
                                 Изменить профиль
                             </button>
                         </a>
-                        <a href="Change_profile_settings.html" style="margin-left: auto;">
+                        <a href="{% url 'events:change-password' request.user.username %}" style="margin-left: auto;">
                             <button class="profile_change" type="button" style="margin-right: 0; margin-left: auto;">
                                 Изменить пароль
                             </button>

@@ -1,5 +1,5 @@
 from django.contrib.auth import authenticate, login
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from django.core.exceptions import ValidationError
 
 from .models import Comments, Event, CustomUser
@@ -72,7 +72,6 @@ class EditEvent(ModelForm):
         }
 
 
-
 class UserLoginForm(AuthenticationForm):
     def __init__(self, *args, **kwargs):
         super(UserLoginForm, self).__init__(*args, **kwargs)
@@ -121,8 +120,25 @@ class UserRegistrationForm(ModelForm):
         # fields = ('username', 'first_name', 'last_name', 'birthday', 'email', 'gender', 'course', 'inform', 'avatar')
         fields = ('username', 'first_name', 'last_name', 'birthday', 'email', 'course', 'avatar', 'inform')
 
-    # def clean_password2(self):
-    #     cd = self.cleaned_data
-    #     if cd['password1'] != cd['password2']:
-    #         raise ValidationError('Passwords don\'t match.')
-    #     return cd['password2']
+
+class ChangePasswordForm(PasswordChangeForm):
+    def __init__(self, *args, **kwargs):
+        super(ChangePasswordForm, self).__init__(*args, **kwargs)
+
+    old_password = PasswordInput()
+    new_password1 = PasswordInput()
+    new_password2 = PasswordInput()
+
+    def clean(self):
+        u = CustomUser.objects.get(username=self.request.user)
+        if self.request.method == 'POST':
+            form = ChangePasswordForm(self.request.POST)
+            if form.is_valid():
+                old_password = self.request.POST.get("old_password")
+                new_pass = self.request.POST.get("new_password1")
+                new_pass_rep = self.request.POST.get("new_password2")
+                from django.contrib.auth.hashers import check_password
+                if not check_password(old_password, u.password):
+                    self.add_error('old_password', 'Old password is wrong')
+        else:
+            form = ChangePasswordForm()
