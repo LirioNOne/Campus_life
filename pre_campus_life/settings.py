@@ -6,6 +6,7 @@ from django.urls import reverse_lazy
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
@@ -71,8 +72,14 @@ WSGI_APPLICATION = 'pre_campus_life.wsgi.application'
 
 DATABASES = {
     'default': {
+        # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        # 'NAME': 'django_project',
+        # 'USER': 'user_name',
+        # 'PASSWORD': 'password',
+        # 'HOST': '127.0.0.1',
+        # 'PORT': '5432',
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': BASE_DIR/'db.sqlite3',
     }
 }
 
@@ -107,6 +114,7 @@ USE_L10N = True
 
 USE_TZ = True
 
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
@@ -122,4 +130,4 @@ LOGOUT_REDIRECT_URL = "events:login"
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
-AUTH_PROFILE_MODULE = 'models.CustomUser'
+AUTH_PROFILE_MODULE = 'models.Customers'

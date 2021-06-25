@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title>Главная</title>
     <link rel="stylesheet" href="{% static 'CampusLife/Main_page_styles.css' %}">
+    <link rel="stylesheet" href="{% static 'CampusLife/Comment_page_style.css' %}">
 </head>
 <body>
 <section class="sec_block">
@@ -12,7 +13,7 @@
         <div class="logo">
             <div class="logo_image">
                 <a href="{% url 'events:main_page' %}">
-                    <img src="/media/Campus%20Life(11).png" alt="Logo" class="logo_image_block">
+                    <img src="{{ MEDIA_URL }}Campus%20Life(11).png" alt="Logo" class="logo_image_block">
                 </a>
             </div>
         </div>
@@ -51,51 +52,68 @@
                         <p style="text-align: right"><a href="{% url 'events:delete_event' el.id %}">Удалить событие</a></p>
                     </div>
                     <div class="event">
-                        <h2>{{ el.title }}</h2>
-                        <span>{{ el.event_datetime }}</span>
-                        <div class="event_info">
-                            <p>{{ el.description }}</p>
-                            {% if el.event_img %}
-                                <img src="{{ el.event_img.url }}" class="post_image">
-                            {% endif %}
-                        </div>
-                       <form action="{% url 'events:event_detail' el.id %}" method="POST">
-                            {% csrf_token %}
-                            <div class="participants">
-                                {% if user not in el.going_to_event.all %}
-                                    <button type="submit" class="record_button">Пойду</button>
-                                {% else %}
-                                    <button type="submit" class="record_button2">Уже иду</button>
+                        <div class="wrapper_event">
+                            <h2>{{ el.title }}</h2>
+                            <p class="event_datetime">{{ el.event_datetime }}</p>
+                            <div class="event_info">
+                                <p>{{ el.description }}</p>
+                                {% if el.event_img %}
+                                    <img src="{{ el.event_img.url }}" class="post_image">
                                 {% endif %}
-                                <div class="event_people">
-                                    <a style="color: white" href="{% url "events:going_to_event_detail" el.id %}">
-                                                Всего идёт: {{ el.going_to_event.all.count }}
-                                    </a>
-                                </div>
+                            </div>
+                        </div>
+                        <div class="participants">
+                            <div class="event_button">
+                                <form action="{% url 'events:event_detail' el.id %}" method="POST">
+                                    {% csrf_token %}
+                                    {% if user not in el.going_to_event.all %}
+                                        <button type="submit" class="record_button">Пойду</button>
+                                    {% else %}
+                                        <button type="submit" class="record_button2">Уже иду</button>
+                                    {% endif %}
+                                </form>
+                            </div>
+                            <div class="event_people" style="text-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);">
+                                <a style="color: white; text-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);"
+                                   href="{% url "events:going_to_event_detail" el.id %}">
+                                        Всего идёт: {{ el.going_to_event.all.count }}
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <form style="margin-top: 10px; margin-left: 20px; color: #000000;" action="{% url 'events:comments' el.id %}" method="POST">
+                            {% csrf_token %}
+                            <div class="comment_form">
+                                {{ form.comment_text }}
+                            </div>
+                            <div class="comment_button">
+                                <input type="submit" class="record_button_comment" value="Добавить комментарий">
                             </div>
                         </form>
                     </div>
-                    <form action="{% url 'events:comments' el.id %}" method="POST">
-                        {% csrf_token %}
-                        <div style="margin-top: 50px">
-                            {{ form.comment_text }}
-                        <br>
-                        <br>
-                        <input type="submit" value="Добавить комментарий">
-                        </div>
-                    </form>
-                    <h4>Комментарии</h4>
-                    {% if not qs %}
+                    <div class="all_comments">
+                        <h2 style="color:#2D5EA8; padding: 0;">Комментарии</h2>
+                        {% if not qs %}
                             <div>Ещё нет комментариев</div>
                         {% else %}
                             {% for comment in qs %}
-                                <strong>{{ comment.user }} - {{ comment.comment_date }}</strong>
-                                <p>{{ comment.comment_text }}</p>
-                                <br>
+                                <div class="comment_output">
+                                    <div class="comment_data">
+                                        <p style="margin-top: 10px; color: #ffffff;">{{ comment.user }} - {{ comment.comment_date }}</p>
+                                    </div>
+                                    <div class="comment">
+                                        <p style="margin: 10px; ">{{ comment.comment_text }}</p>
+                                    </div>
+                                </div>
                             {% endfor %}
                         {% endif %}
+                    </div>
                     <a href="{% url 'events:main_page' %}" style="justify-content: flex-start">
-                        <p >< назад</p>
+                        <p style="margin-top: 20px">
+                            <button class="record_button">назад</button>
+                        </p>
                     </a>
                 </div>
             </div>

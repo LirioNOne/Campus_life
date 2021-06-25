@@ -2,23 +2,6 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
-# class CustomUser(models.Model):
-#     login = models.TextField('логин')
-#     password = models.TextField('пароль')
-#     salt = models.TextField('соль')
-#     email = models.EmailField('email')
-#     full_name = models.TextField('полное имя')
-#     profile_icon = models.TextField('изображение профиля', blank=True)
-#     self_info = models.TextField('личная информация', blank=True)
-#     is_admin = models.BooleanField('админ?', default=False)
-#
-#     def __str__(self):
-#         return self.login
-#
-#     class Meta:
-#         verbose_name = 'Пользователь'
-#         verbose_name_plural = 'Пользователи'
-
 class CustomUser(User):
     birthday = models.DateField(verbose_name='День рождения', null=True)
     course = models.CharField(max_length=1, verbose_name='Курс')
@@ -51,7 +34,7 @@ class Event(models.Model):
     creator_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name='creator_id')
     title = models.TextField('название')
     description = models.TextField('краткое описание')
-    event_img = models.ImageField('изображение для события', upload_to='media/', blank=True)
+    event_img = models.ImageField('изображение для события', upload_to='C:/media/event_images', blank=True)
     event_datetime = models.DateTimeField(auto_now_add=True)
     going_to_event = models.ManyToManyField(User, default=None, blank=True, related_name='going_to_event')
     event_comments = models.ManyToManyField(User, default=None, blank=True, related_name='event_comments')

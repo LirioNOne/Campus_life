@@ -19,12 +19,10 @@
                                 <label class="input_password" for="username">Логин:</label>
                                 <p class="login_indent">{{ form.username }}</p>
                             </div>
-
                             <div class="input_password">
                                 <label class="input_password" for="password">Пароль:</label>
                                 <p class="login_indent">{{ form.password }}</p>
                             </div>
-
                             {% csrf_token %}
                             <div class="log_button_block">
                                 <input type="hidden" name="next" value="{% url 'events:main_page' %}"/>
@@ -32,7 +30,6 @@
                             </div>
                         </form>
                     </div>
-
                     <div style="display: flex; flex-direction: column; align-items: center; margin-top: 30px;">
                         <a>
                             <a>Если у вас нет аккаунта:</a>

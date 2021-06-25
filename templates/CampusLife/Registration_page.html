@@ -1,49 +1,87 @@
-{% extends "CampusLife/base.html" %}
-{% block title %}Создать событие{% endblock %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Регистрация</title>
+    <link href="{% static 'CampusLife/Registration_styles.css' %}" rel="stylesheet">
+    <link href="{% static 'CampusLife/Main_page_styles.css' %}" rel="stylesheet">
+</head>
 {% block content %}
-    <div class="registration_block">
-        <div class="reg_entry_unit">
-            <a class="reg_font">Регистрация</a>
-            <div class="reg_list">
-                <form action="{% url 'events:registration_page' %}" method="post" enctype="multipart/form-data"
-                      novalidate class="reg_input_line">
-                    {% csrf_token %}
-                    <div class="reg_input_line">
-                        <input type="text" class="input_text" placeholder="Имя" name="first_name">
-                    </div>
-                    <div class="reg_input_line">
-                        <input type="text" class="input_text" placeholder="Фамилия" name="last_name">
-                    </div>
-                    <div class="reg_input_line">
-                        <input type="text" class="input_text" placeholder="Логин" name="username">
-                    </div>
-                    <div class="reg_input_line">
-                        <input type="text" class="input_text" placeholder="Почта" name="email">
-                    </div>
-                    <div class="reg_input_line">
-                        <input type="date" class="input_text" name="birthday">
-                    </div>
-                    <div class="reg_input_line">
-                        <input type="password" class="input_text" placeholder="Пароль" name="password1">
-                    </div>
-                    <div class="reg_input_line">
-                        <input type="password" class="input_text" placeholder="Повтор пароля" name="password2">
-                    </div>
-                    <div class="reg_input_line">
-                        <input type="text" class="input_text" placeholder="Курс" name="course">
-                    </div>
-                    <div class="reg_input_line">
-                        <input type="file" accept="image/*" name="avatar">
-                    </div>
-                    <div class="reg_information">
-                        <textarea name="inform" placeholder="Информация о себе" class="reg_self_info"></textarea>
-                    </div>
+    {% load crispy_forms_tags %}
 
-                    <div class="reg_button_block">
-                        <input class="red_button" type="submit" value="Зарегистрироваться">
+    <main class="registration_section">
+        <nav class="nav_head">
+            <div class="logo">
+                <div class="logo_image">
+                    <a href="{% url 'events:main_page' %}">
+                        <img src="{{ MEDIA_URL }}Campus%20Life(11).png" alt="Logo" class="logo_image_block">
+                    </a>
+                </div>
+            </div>
+            <div class="nav_block">
+                <div class="nav_login">
+                    <div class="login">
+                        <a href="{% url 'events:login_page' %}">
+                            <button class="login_button">Вход</button>
+                        </a>
                     </div>
-                </form>
+                    <div class="registration">
+                        <a href="{% url 'events:registration_page' %}">
+                            <button class="register_button">Регистрация</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <div class="registration_block">
+            <div class="reg_entry_unit">
+                <a class="reg_font">Регистрация</a>
+                <div class="reg_list">
+                    <form action="{% url 'events:registration_page' %}" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="reg_input_line">
+                            <input type="text" class="input_text" placeholder="Имя" name="first_name" >
+                        </div>
+                        <div class="reg_input_line">
+                            <input type="text" class="input_text" placeholder="Фамилия" name="last_name">
+                        </div>
+                        <div class="reg_input_line">
+                            <input type="text" class="input_text" placeholder="Логин" name="username">
+                        </div>
+                        <div class="reg_input_line">
+                            <input type="text" class="input_text" placeholder="Почта" name="email">
+                        </div>
+                        <div class="reg_input_line">
+                            <input type="date" class="input_text" name="birthday">
+                        </div>
+                        <div class="reg_input_line" >
+                            {{ crispy.gender }}
+                        </div>
+                        <div class="reg_input_line">
+                            <input type="password" class="input_text" placeholder="Пароль" name="password1">
+                        </div>
+                        <div class="reg_input_line">
+                            <input type="password" class="input_text" placeholder="Повтор пароля" name="password2">
+                        </div>
+                        <div class="reg_input_line">
+                            <input type="text" class="input_text" placeholder="Курс" name="course">
+                        </div>
+                        <div class="reg_input_line">
+                            <input type="file" accept="image/*" name="avatar">
+                        </div>
+                        <div class="reg_information">
+                            <textarea name="inform" placeholder="Информация о себе" class="reg_self_info"></textarea>
+                        </div>
+
+                        <div class="reg_button_block">
+                            <a href="{% url 'events:main_page' %}">
+                                <input class="reg_button" type="submit" value="Зарегистрироваться">
+                            </a>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
+    </main>
 {% endblock %}
