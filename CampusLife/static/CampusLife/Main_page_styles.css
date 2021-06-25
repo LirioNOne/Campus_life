@@ -145,6 +145,7 @@ h2 {
 .sec_block {
     display: flex;
     flex-direction: column;
+
     background-image: url("https://baltic-grlk5lagedl.stackpathdns.com/production/baltic/images/1617367561771027-Prada-and-UNESCO-Sea-Beyond-project_courtesy-of-Prada-6-.jpg?w=1920&h=800&fit=clip&crop=focalpoint&auto=%5B%22format%22%2C%20%22compress%22%5D&cs=srgb");
     background-size: cover;
     background-color: #edeef0;
@@ -210,7 +211,9 @@ h2 {
     flex-direction: column;
     justify-content: center;
     width: 80px;
+    margin: 0 5px;
 }
+
 
 .button_to_profile {
     background-color: #e7e7e7;
@@ -219,6 +222,7 @@ h2 {
     width: 80px;
     padding: 10px;
     border-radius: 12px;
+    margin-right: 10px;
 }
 
 .button_to_profile:hover {
@@ -296,3 +300,8 @@ h2 {
     max-height: 60%;
     max-width: 60%;
 }
+
+.marg{
+    margin-right: 10px;
+}
+

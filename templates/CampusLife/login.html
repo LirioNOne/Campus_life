@@ -1,63 +1,7 @@
-{#{% extends "registration/base.html" %}#}
-{##}
-{#{% block title %}Log-in{% endblock %}#}
-{#{% block content %}#}
-{#    <h1>Log-in</h1>#}
-{#    {% if form.errors %}#}
-{#        <p>#}
-{#            Your username and password didn't match.#}
-{#            Please try again.#}
-{#        </p>#}
-{#    {% else %}#}
-{#        <p>Please, use the following form to log-in:</p>#}
-{#    {% endif %}#}
-{#    <div class="login-form">#}
-{#        <form action="login" method="post">#}
-{#            {{ form.as_p }}#}
-{#            {% csrf_token %}#}
-{#            <input type="hidden" name="next" value="{% url 'main' %}"/>#}
-{#            <p><input type="submit" value="Log-in"></p>#}
-{#        </form>#}
-{#    </div>#}
-{#<p>If you don't have account <a href="{% url 'register' %}">registration</a></p>#}
-{#{% endblock %}#}
-
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Вход</title>
-    <link rel="stylesheet" href="{% static 'CampusLife/Login_page_styles.css' %}">
-    <link href="{% static 'CampusLife/Main_page_styles.css' %}" rel="stylesheet">
-</head>
-<body>
-
-<section class="background_screen">
+{% extends "CampusLife/base.html" %}
+{% block title %}Создать событие{% endblock %}
+{% block content %}
     <div class="login_page">
-        <nav class="nav_head">
-            <div class="logo">
-                <div class="logo_image">
-                    <a href="{% url 'events:main_page' %}">
-                        <img src="{{ MEDIA_URL }}Campus%20Life(11).png" alt="Logo" class="logo_image_block">
-                    </a>
-                </div>
-            </div>
-            <div class="nav_block">
-                <div class="nav_login">
-                    <div class="login">
-                        <a href="{% url 'events:login_page' %}">
-                            <button class="login_button">Вход</button>
-                        </a>
-                    </div>
-                    <div class="registration">
-                        <a href="{% url 'events:registration_page' %}">
-                            <button class="register_button">Регистрация</button>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </nav>
         <main class="login_block">
             <div class="login_block_section">
                 <a class="entry_font">Вход</a>
@@ -99,6 +43,4 @@
             </div>
         </main>
     </div>
-</section>
-</body>
-</html>
+{% endblock %}
