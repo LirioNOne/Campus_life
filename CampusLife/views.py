@@ -3,7 +3,7 @@ from django.contrib.auth import authenticate, login
 from django.forms import model_to_dict
 from django.shortcuts import render, redirect
 from django.http import HttpResponseNotFound
-from .models import Event, GoingToEvent, Comments
+from .models import Event, GoingToEvent, Comments, CustomUser
 from pre_campus_life import settings
 from .forms import AddComment, EditEvent, UserRegistrationForm, AddEvent
 
@@ -98,10 +98,24 @@ def comments(request, pk):
 
 def prettify_image(file_path: str, prefix: str = 'media/') -> None:
     img = Image.open(f"{prefix}{file_path}")
-    maxsize = (300, 300)
+    maxsize = (250, 250)
     img = img.resize(maxsize)
     print(f"{prefix}{file_path}")
     img.save(f"{prefix}{file_path}")
+
+
+def customers_profile_view(request, username):
+    user = CustomUser.objects.filter(username=username).values()
+    user = user[0]
+    prettify_image(user['avatar'])
+
+    profile = {}
+    ff = ['username', 'first_name', 'last_name', 'birthday', 'email', 'course', 'inform']
+    for item in user:
+        if item in ff:
+            profile.update({f'{item}': user[item]})
+
+    return render(request, 'CampusLife/profile.html', {'crispy': profile, 'user': user})
 
 
 def create_event(request):

@@ -5,7 +5,7 @@ from django.contrib.auth import views as v
 from pre_campus_life import settings
 from registration.forms import UserLoginForm
 from .views import main_page, registration_page, going_to_event, going_to_event_detail, event_detail, \
-    comments, create_event, edit_event, delete_event
+    comments, create_event, edit_event, delete_event, customers_profile_view
 
 app_name = 'events'
 
@@ -27,5 +27,6 @@ urlpatterns = [
                   path('event-_etail/<int:pk>/comments', comments, name='comments'),
                   path('create_event', create_event, name='create_event'),
                   path('edit_event/<int:pk>', edit_event, name='edit_event'),
-                  path('delete_event/<int:pk>', delete_event, name='delete_event')
+                  path('delete_event/<int:pk>', delete_event, name='delete_event'),
+                  path('profile/<username>', customers_profile_view, name='profile'),
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
