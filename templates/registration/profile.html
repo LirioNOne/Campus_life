@@ -1,0 +1,16 @@
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+{% load crispy_forms_tags %}
+
+<h2>Profile</h2>
+<div class="container">
+    <form action="profile" method="get" enctype="multipart/form-data">
+        <img src="{{ MEDIA_URL }}{{user.avatar}}" />
+        {% for field, value in crispy.items %}
+        <p>{{ field }} - {{ value }}</p>
+        {% endfor %}
+        {% csrf_token %}
+    </form>
+</div>
+{% endblock %}

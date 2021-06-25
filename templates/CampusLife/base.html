@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'CampusLife/Main_page_styles.css' %}">
+    <link rel="stylesheet" href="{% static 'CampusLife/Login_page_styles.css' %}">
+    <link rel="stylesheet" href="{% static 'CampusLife/Registration_styles.css' %}">
+</head>
+<body>
+<section class="sec_block">
+    <nav class="nav_head nav_move">
+        <div class="logo">
+            <div class="logo_image">
+                <a href="{% url 'events:main_page' %}">
+                    <img src="/media/Campus%20Life(11).png" alt="Logo" class="logo_image_block">
+                </a>
+            </div>
+        </div>
+        <div class="nav_block">
+            {% if request.user.is_authenticated %}
+            <div style="display: flex; flex-direction: row-reverse">
+                <div class="my_page">
+                    <a href="my_page.html">
+                        <button class="button_to_profile">Профиль</button>
+                    </a>
+                </div>
+
+            </div>
+            <div style="display: flex; flex-direction: row-reverse">
+                <div class="my_page">
+                    <a href="{% url 'events:logout' %}">
+                        <button class="button_to_profile">Выход</button>
+                    </a>
+                </div>
+            </div>
+            <div class="login">
+                <a href="{% url 'events:create_event' %}">
+                    <button class="button_to_profile">Создать Событие</button>
+                </a>
+            </div>
+            {% else %}
+            <div class="nav_login">
+                <div class="login">
+                    <a href="{% url 'events:login' %}">
+                        <button class="login_button">Вход</button>
+                    </a>
+                </div>
+                <div class="registration">
+                    <a href="{% url 'events:registration_page' %}">
+                        <button class="register_button">Регистрация</button>
+                    </a>
+                </div>
+
+            </div>
+           {% endif %}
+        </div>
+    </nav>
+    {% block content %}{% endblock content %}
+</section>
+</body>
+</html>

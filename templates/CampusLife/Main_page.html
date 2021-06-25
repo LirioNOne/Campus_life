@@ -1,0 +1,50 @@
+{% extends "CampusLife/base.html" %}
+{% block title %}Campus Life{% endblock %}
+{% block content %}
+    <main class="main_block" role="main">
+        <div class="main_submit">
+            <div class="main_events">
+                <div class="events_block">
+                    <div>
+                        {% if qs %}
+                            {% for el in qs %}
+                                <div class="event">
+                                    <h2><a style="color: black"
+                                           href="{% url 'events:event_detail' el.id %}">{{ el.title }}</a></h2>
+                                    <span>{{ el.event_datetime }}</span>
+                                    <div class="event_info">
+                                        <p>{{ el.description }}</p>
+                                        {% if el.event_img %}
+                                            <img src="{{ el.event_img.url }}" class="post_image">
+                                        {% endif %}
+                                    </div>
+                                    <div class="participants">
+                                        <div class="event_button">
+                                            <form action="{% url 'events:going_to_event' %}" method="POST">
+                                                {% csrf_token %}
+                                                <input type="hidden" name="event_id" value="{{ el.id }}">
+                                                {% if user not in el.going_to_event.all %}
+                                                    <button type="submit" class="record_button">Пойти</button>
+                                                {% else %}
+                                                    <button type="submit" class="record_button2">Уже иду</button>
+                                                {% endif %}
+                                                <div class="event_people">
+                                                    <a style="color: white"
+                                                       href="{% url "events:going_to_event_detail" el.id %}">
+                                                        Всего идёт: {{ el.going_to_event.all.count }}
+                                                    </a>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            <p>Пока нет никаких событий</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}
