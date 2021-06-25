@@ -72,21 +72,22 @@ class UserRegistrationForm(ModelForm):
         label='Дата рождения',
         widget=TextInput(attrs={'type': 'date'})
     )
-    GENDER = (
-        ("Мужчина", "Мужчина"),
-        ("Женщина", "Женщина")
-    )
+    # GENDER = (
+    #     ("Мужчина", "Мужчина"),
+    #     ("Женщина", "Женщина")
+    # )
     avatar = ImageField(label='Фото')
-    gender = ChoiceField(label='Пол', choices=GENDER, widget=Select())
+    # gender = ChoiceField(label='Пол', choices=GENDER, widget=Select())
 
     def __init__(self, *args, **kwargs):
         super(UserRegistrationForm, self).__init__(*args, **kwargs)
         self.fields['username'].help_text = None
-        self.fields['gender'].required = False
+        # self.fields['gender'].required = False
 
     class Meta:
         model = CustomUser
-        fields = ('username', 'first_name', 'last_name', 'birthday', 'email', 'gender', 'course', 'inform', 'avatar')
+        # fields = ('username', 'first_name', 'last_name', 'birthday', 'email', 'gender', 'course', 'inform', 'avatar')
+        fields = ('username', 'first_name', 'last_name', 'birthday', 'email', 'course', 'avatar', 'inform')
 
     # def clean_password2(self):
     #     cd = self.cleaned_data

@@ -38,7 +38,7 @@
             <div class="reg_entry_unit">
                 <a class="reg_font">Регистрация</a>
                 <div class="reg_list">
-                    <form action="" method="post" enctype="multipart/form-data" novalidate class="reg_input_line">
+                    <form action="{% url 'events:registration_page' %}" method="post" enctype="multipart/form-data" novalidate class="reg_input_line">
                         {% csrf_token %}
                         <div class="reg_input_line">
                             <input type="text" class="input_text" placeholder="Имя" name="first_name" >

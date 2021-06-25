@@ -154,16 +154,19 @@ def registration_page(request):
                 print('avatar')
                 new_user.avatar = request.FILES['avatar']
 
-            new_user.set_password(user_form.cleaned_data['password'])
+            new_user.set_password(user_form.cleaned_data['password1'])
 
             new_user.save()
             print('saved')
             user = authenticate(username=user_form.cleaned_data['username'],
-                                password=user_form.cleaned_data['password'],
+                                password=user_form.cleaned_data['password1'],
                                 )
             login(request, user)
-            return render(request, 'CampusLife/Main_page.html', {'crispy': user_form})
+            return redirect('events:main_page')
+        else:
+            return redirect('events:registration_page')
+            # return render(request, 'CampusLife/Main_page.html', {'crispy': user_form})
 
     else:
         user_form = UserRegistrationForm()
-    return render(request, 'CampusLife/Registration_page.html', {'crispy': user_form})
+        return render(request, 'CampusLife/Registration_page.html', {'crispy': user_form})

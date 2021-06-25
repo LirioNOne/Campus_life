@@ -27,9 +27,9 @@ class CustomUser(User):
 
     birthday = models.DateField(verbose_name='День рождения', null=True)
     course = models.CharField(max_length=1, verbose_name='Курс')
-    inform = models.TextField(verbose_name='Информация о себе')
+    inform = models.TextField(verbose_name='Информация о себе', blank=True)
     avatar = models.ImageField(verbose_name='фото', blank=True, null=True, upload_to='images/')
-    gender = models.CharField(max_length=7, verbose_name='Пол', choices=GENDER, default='Мужчина')
+    # gender = models.CharField(max_length=7, verbose_name='Пол', choices=GENDER, default='Мужчина')
 
     @staticmethod
     def age(birthday):
@@ -42,7 +42,7 @@ class CustomUser(User):
     val = property(values)
 
     class Meta:
-        verbose_name = 'ПОльзователь'
+        verbose_name = 'Пользователь'
         verbose_name_plural = 'Пользователи'
 
     @staticmethod
